@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { ptr } from "../../helpers";
+import { ptr } from "../../utils";
 
 export const StyledButton = styled.button`
   cursor: pointer;
