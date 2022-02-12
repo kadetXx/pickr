@@ -1,5 +1,3 @@
-import { Button } from "./button/Button"
+import { Button } from "./button/Button";
 
-export {
-  Button
-}
+export { Button };

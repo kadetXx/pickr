@@ -1,13 +1,22 @@
 import React, { ButtonHTMLAttributes } from "react";
-
 export interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
-  date: string;
+  selectedDate:
+    | "Today"
+    | "Yesterday"
+    | "This Monday"
+    | "Last Monday"
+    | `${number}/${number}/${number}`;
 }
 
-export const Button: React.VFC<Props> = ({ date, ...props }) => {
+import { StyledButton } from "./Button.styles";
+
+export const Button: React.VFC<Props> = ({
+  selectedDate,
+  ...props
+}) => {
   return (
-    <button {...props} className="pickr__button">
-      {date}
-    </button>
+    <StyledButton {...props}>
+      {selectedDate}
+    </StyledButton>
   );
 };
