@@ -2,7 +2,7 @@ import React from "react";
 import { PickrContainer } from "./Pickr.styles";
 
 import { Button } from "./components";
-import { GlobalStyles } from "./shared";
+import PlusIcon from "./svg/icon-plus.svg";
 
 interface Props {
   disabled?: boolean;
@@ -10,11 +10,8 @@ interface Props {
 
 export const Pickr: React.VFC<Props> = ({ disabled }) => {
   return (
-    <>
-      <GlobalStyles />
-      <PickrContainer>
-        <Button disabled={disabled} selectedDate="Today" />
-      </PickrContainer>
-    </>
+    <PickrContainer>
+      <Button disabled={disabled} icon={PlusIcon} selectedDate="Today" />
+    </PickrContainer>
   );
 };

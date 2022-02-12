@@ -1,5 +1,10 @@
 import React, { ButtonHTMLAttributes } from "react";
-export interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
+import { Text, Icon } from "../../shared";
+import { StyledButton } from "./Button.styles";
+
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  icon?: string;
+  iconRotation?: number;
   selectedDate:
     | "Today"
     | "Yesterday"
@@ -8,15 +13,21 @@ export interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
     | `${number}/${number}/${number}`;
 }
 
-import { StyledButton } from "./Button.styles";
-
-export const Button: React.VFC<Props> = ({
+export const Button: React.VFC<ButtonProps> = ({
+  icon,
+  iconRotation,
   selectedDate,
   ...props
 }) => {
   return (
     <StyledButton {...props}>
-      {selectedDate}
+      <Text size={13} color="grey">
+        {selectedDate}
+      </Text>
+
+      {icon && (
+        <Icon src={icon} width={10} height={10} rotation={iconRotation} />
+      )}
     </StyledButton>
   );
 };
