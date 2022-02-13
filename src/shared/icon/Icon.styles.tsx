@@ -8,5 +8,5 @@ export const StyledIcon = styled.img<Pick<IconProps, "width" | "height" | "rotat
   width: ${(props) => `${props.width / 16}rem`};
   height: ${(props) => `${props.height / 16}rem`};
   transform: ${props => props.rotation ? `rotate(${props.rotation}deg)` : "initial"};
-  transition: transform 0.1s linear;
+  transition: transform 0.2s linear;
 `;
