@@ -91,8 +91,6 @@ export const getDayData = ({
   
   dayData["date"] = dateString;
   dayData["timeStamp"] = dateString.getTime();
-
-  index === 1 && console.log(`${day}/${monthOfCurrentIndex + 1}/${2022}`);
-
+  
   return dayData;
 };
