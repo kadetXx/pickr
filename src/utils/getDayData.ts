@@ -36,7 +36,7 @@ export const getDayData = ({
 
   // check if current iteration is a spillover
   const belongsToPrevMonth = index < firstDay;
-  const belongsToNextMonth = index + 1 > activeMonthNoOfDays;
+  const belongsToNextMonth = index > activeMonthNoOfDays;
 
   // get the correct day of the month and correct year of the current iteration
   const { monthOfCurrentIndex, yearOfCurrentIndex } =
@@ -61,7 +61,7 @@ export const getDayData = ({
   dayData["year"] = yearOfCurrentIndex;
 
   // get the weekday of the current iteration
-  const weekDayIndex = index % firstDay;
+  const weekDayIndex = index % 7;
   dayData["weekDay"] = weekDays[weekDayIndex];
 
   // initialize day variabe that'll be updated depending on if current iteration belongs
@@ -71,25 +71,28 @@ export const getDayData = ({
   // get number of spills of previous month
   const noOfPrevMonthSpills = firstDay - index;
 
-  month === 1 && console.log(prevMonthNoOfDays);
-  
-
   // if the current iteration belongs to previous month
   day = belongsToPrevMonth
     ? // day will be equal to no of days in current iterations's month minus number of spills plus one
-      (prevMonthNoOfDays - noOfPrevMonthSpills) + 1
+      prevMonthNoOfDays - noOfPrevMonthSpills + 1
     : // else if current iteration belongs to next month,
     belongsToNextMonth
     ? // day will be the total number of days of active month subtracted from current index plus one
-      (index + 1) - activeMonthNoOfDays
+      index + 1 - activeMonthNoOfDays
     : // otherwise, the  day will be one plus firstDayOfMonth minus current index
       index - firstDay + 1;
 
   // set day, date and timestamnp
   dayData["day"] = day;
-  dayData["date"] = new Date(
-    `${day + 1}/${monthOfCurrentIndex + 1}/${yearOfCurrentIndex}`
+
+  const dateString = new Date(
+    `${monthOfCurrentIndex + 1}/${day}/${yearOfCurrentIndex}`
   );
+  
+  dayData["date"] = dateString;
+  dayData["timeStamp"] = dateString.getTime();
+
+  index === 1 && console.log(`${day}/${monthOfCurrentIndex + 1}/${2022}`);
 
   return dayData;
 };

@@ -22,7 +22,7 @@ export const getMonthDetails = (month: number, year: number) => {
       index,
       month,
       year,
-      firstDay,
+      firstDay: firstDay - 1,
     });
 
     calendarDays.push(currentDay);
