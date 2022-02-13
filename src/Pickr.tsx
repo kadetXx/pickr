@@ -5,12 +5,11 @@ import React, {
   HTMLAttributes,
 } from "react";
 
-import { PickrContainer, GridSections, OptionsContainer } from "./Pickr.styles";
-import { Button, Overlay, PresetDay, PresetDayProps } from "./components";
+import { PickrContainer, PickrSections, PickrPresets, PickrCalendar } from "./Pickr.styles";
+import { Button, Overlay, PresetItem, PresetItemProps } from "./components";
 
+import { presetDays } from "./constants";
 import PlusIcon from "./svg/icon-plus.svg";
-import CalendarStarIcon from "./svg/icon-calendar-star.svg";
-import CalendarStarIconTeal from "./svg/icon-calendar-star-teal.svg";
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
   disabled?: boolean;
@@ -26,42 +25,13 @@ export const Pickr: React.VFC<Props> = ({
   ...props
 }) => {
   const [showCalendar, setShowCalendar] = useState<boolean>(false);
-  const [activePreset, setActivePreset] =
-    useState<PresetDayProps["presetTitle"]>("Today");
-  const presetDays: Pick<PresetDayProps, "presetTitle" | "icon" | "iconAlt">[] =
-    [
-      {
-        presetTitle: "Today",
-        icon: CalendarStarIcon,
-        iconAlt: CalendarStarIconTeal,
-      },
-      {
-        presetTitle: "Yesterday",
-        icon: CalendarStarIcon,
-        iconAlt: CalendarStarIconTeal,
-      },
-      {
-        presetTitle: "This Monday",
-        icon: CalendarStarIcon,
-        iconAlt: CalendarStarIconTeal,
-      },
-      {
-        presetTitle: "Last Monday",
-        icon: CalendarStarIcon,
-        iconAlt: CalendarStarIconTeal,
-      },
-      {
-        presetTitle: "Custom",
-        icon: CalendarStarIcon,
-        iconAlt: CalendarStarIconTeal,
-      },
-    ];
+  const [activePreset, setActivePreset] = useState<PresetItemProps["presetTitle"]>("Today");
 
-  const handleClick = () => {
+  const handleClick = (): void => {
     setShowCalendar(!showCalendar);
   };
 
-  const handleBlur = () => {
+  const handleBlur = (): void => {
     closeOnBlur && setShowCalendar(false);
   };
 
@@ -83,18 +53,21 @@ export const Pickr: React.VFC<Props> = ({
         onClick={handleClick}
       />
       <Overlay visible={showCalendar}>
-        <GridSections>
-          <OptionsContainer>
+        <PickrSections>
+          <PickrPresets>
             {presetDays.map((option, index) => (
-              <PresetDay
+              <PresetItem
                 key={index}
                 action={setActivePreset}
                 active={activePreset === option.presetTitle}
                 {...option}
               />
             ))}
-          </OptionsContainer>
-        </GridSections>
+          </PickrPresets>
+          <PickrCalendar>
+            Hi
+          </PickrCalendar>
+        </PickrSections>
       </Overlay>
     </PickrContainer>
   );

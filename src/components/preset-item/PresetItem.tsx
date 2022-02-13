@@ -1,8 +1,8 @@
 import React, { HTMLAttributes } from "react";
 import { Text, Icon } from "../../shared";
-import { StyledPreset } from "./PresetDay.styles";
+import { StyledPreset } from "./PresetItem.styles";
 
-export interface PresetDayProps extends HTMLAttributes<HTMLDivElement> {
+export interface PresetItemProps extends HTMLAttributes<HTMLDivElement> {
   active: boolean;
   icon: string;
   iconAlt: string;
@@ -10,7 +10,7 @@ export interface PresetDayProps extends HTMLAttributes<HTMLDivElement> {
   action: (text: this["presetTitle"]) => void;
 }
 
-export const PresetDay: React.VFC<PresetDayProps> = ({
+export const PresetItem: React.VFC<PresetItemProps> = ({
   presetTitle,
   active,
   icon,

@@ -22,7 +22,7 @@ export const PickrContainer = styled.div`
   font-family: "SF Pro Display", sans-serif;
 `;
 
-export const GridSections = styled.div`
+export const PickrSections = styled.div`
   display: grid;
   min-height: 100%;
   height: ${ptr(297)};
@@ -30,10 +30,24 @@ export const GridSections = styled.div`
   grid-template-columns: ${`${ptr(183)} ${ptr(275)}`};
 `;
 
-export const OptionsContainer = styled.div`
+export const PickrPresets = styled.div`
   width: 100%;
   min-height: 100%;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  row-gap: ${ptr(3)};
   background-color: var(--col-grey-500);
   padding: ${`${ptr(24)} ${ptr(17)} ${ptr(24)} ${ptr(25)}`};
+`;
+
+export const PickrCalendar = styled.div`
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  row-gap: ${ptr(25)};
+  padding: ${`${ptr(24)} ${ptr(37)} ${ptr(34)} ${ptr(12)}`};
 `;

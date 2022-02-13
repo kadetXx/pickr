@@ -8,6 +8,6 @@ export const StyledText = styled.p<Pick<TextProps, "color" | "weight" | "size">>
   margin: 0;
   font-family: inherit;
   font-size: ${props => props.size ? ptr(props.size) : 'inherit'};
-  font-weight: ${(props) => props.weight === 'bold' ? 500 : 400};
+  font-weight: ${(props) => props.weight === 'bold' ? 600 : 400};
   color: ${(props) => `var(--col-${props.color})`};
 `;
