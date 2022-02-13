@@ -66,7 +66,6 @@ export const Pickr: React.VFC<PickrProps> = ({
     const presentMonth = new Date().getMonth();
     const presentYear = new Date().getFullYear();
     
-
     const calendar = getMonthDetails(presentMonth, presentYear);
     setCalendarState(calendar);
 
@@ -117,10 +116,10 @@ export const Pickr: React.VFC<PickrProps> = ({
                 <CalendarDay
                   key={index}
                   status={
-                    day.month === selectedDay?.month
-                      ? "selectable"
-                      : day.timeStamp === selectedDay?.timeStamp
+                    day.timeStamp === selectedDay?.timeStamp
                       ? "active"
+                      : day.month === selectedDay?.month
+                      ? "selectable"
                       : "dormant"
                   }
                   date={day.dayOfMonth as number}
