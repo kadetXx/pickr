@@ -9,7 +9,6 @@ export interface TextProps extends HTMLAttributes<HTMLParagraphElement> {
 
 export const Text: React.FC<TextProps> = ({
   children,
-  size,
   weight = "normal",
   color = "grey",
   ...props

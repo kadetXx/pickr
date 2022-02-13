@@ -26,38 +26,36 @@ export const Pickr: React.VFC<Props> = ({
   ...props
 }) => {
   const [showCalendar, setShowCalendar] = useState<boolean>(false);
-  const presetDays: PresetDayProps[] = [
-    {
-      text: "Today",
-      active: true,
-      icon: CalendarStarIcon,
-      iconAlt: CalendarStarIconTeal,
-    },
-    {
-      text: "Yesterday",
-      active: false,
-      icon: CalendarStarIcon,
-      iconAlt: CalendarStarIconTeal,
-    },
-    {
-      text: "This Monday",
-      active: false,
-      icon: CalendarStarIcon,
-      iconAlt: CalendarStarIconTeal,
-    },
-    {
-      text: "Last Monday",
-      active: false,
-      icon: CalendarStarIcon,
-      iconAlt: CalendarStarIconTeal,
-    },
-    {
-      text: "Custom",
-      active: false,
-      icon: CalendarStarIcon,
-      iconAlt: CalendarStarIconTeal,
-    },
-  ];
+  const [activePreset, setActivePreset] =
+    useState<PresetDayProps["presetTitle"]>("Today");
+  const presetDays: Pick<PresetDayProps, "presetTitle" | "icon" | "iconAlt">[] =
+    [
+      {
+        presetTitle: "Today",
+        icon: CalendarStarIcon,
+        iconAlt: CalendarStarIconTeal,
+      },
+      {
+        presetTitle: "Yesterday",
+        icon: CalendarStarIcon,
+        iconAlt: CalendarStarIconTeal,
+      },
+      {
+        presetTitle: "This Monday",
+        icon: CalendarStarIcon,
+        iconAlt: CalendarStarIconTeal,
+      },
+      {
+        presetTitle: "Last Monday",
+        icon: CalendarStarIcon,
+        iconAlt: CalendarStarIconTeal,
+      },
+      {
+        presetTitle: "Custom",
+        icon: CalendarStarIcon,
+        iconAlt: CalendarStarIconTeal,
+      },
+    ];
 
   const handleClick = () => {
     setShowCalendar(!showCalendar);
@@ -88,7 +86,12 @@ export const Pickr: React.VFC<Props> = ({
         <GridSections>
           <OptionsContainer>
             {presetDays.map((option, index) => (
-              <PresetDay key={index} {...option} />
+              <PresetDay
+                key={index}
+                action={setActivePreset}
+                active={activePreset === option.presetTitle}
+                {...option}
+              />
             ))}
           </OptionsContainer>
         </GridSections>

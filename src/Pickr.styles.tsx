@@ -25,6 +25,7 @@ export const PickrContainer = styled.div`
 export const GridSections = styled.div`
   display: grid;
   min-height: 100%;
+  height: ${ptr(297)};
   box-sizing: border-box;
   grid-template-columns: ${`${ptr(183)} ${ptr(275)}`};
 `;
