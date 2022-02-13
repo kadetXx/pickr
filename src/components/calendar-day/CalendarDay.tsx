@@ -2,14 +2,19 @@ import React, { HTMLAttributes } from "react";
 import { StyledDay } from "./CalendarDay.styles";
 import { Text } from "../../shared";
 
-interface CalendarDayProps extends HTMLAttributes<HTMLDivElement> {
+export interface CalendarDayProps extends HTMLAttributes<HTMLDivElement> {
   date: string | number;
   status: "active" | "selectable" | "dormant";
+  onClick?: () => void;
 }
 
-export const CalendarDay: React.VFC<CalendarDayProps> = ({ status, date }) => {
+export const CalendarDay: React.VFC<CalendarDayProps> = ({
+  status,
+  date,
+  onClick,
+}) => {
   return (
-    <StyledDay isActive={status === "active"}>
+    <StyledDay status={status} isClickable={!!onClick} onClick={onClick}>
       <Text
         size={13}
         weight="bold"

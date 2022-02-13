@@ -123,6 +123,7 @@ export const Pickr: React.VFC<PickrProps> = ({
                       : "dormant"
                   }
                   date={day.dayOfMonth as number}
+                  onClick={() => setSelectedDay(day)}
                 />
               ))}
             </CalendarBody>
