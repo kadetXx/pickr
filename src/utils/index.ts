@@ -1,2 +1,2 @@
 export * from './pxToRem';
-export * from './monthKit';
+export * from './getMonthData';

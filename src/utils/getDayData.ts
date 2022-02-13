@@ -1,5 +1,7 @@
-import type { Month, Day } from "../constants";
+import type { Day } from "../constants";
 import { weekDays } from "../constants";
+import { getNumberOfDays } from "./getNumberOfDays";
+import { getMonthAndYearOfSpillOvers } from "./getMonthAndYearOfSpillOver";
 
 interface DayData {
   weekDay: Day | null;
@@ -9,56 +11,6 @@ interface DayData {
   date: Date | null;
   timeStamp: number | null;
 }
-
-// get first day
-export const getFirstdayOfMonth = (month: number, year: number): number => {
-  return new Date(year, month).getDay();
-};
-
-// get number of days in the month
-export const getNumberOfDays = (month: number, year: number): number => {
-  const range = 35;
-  const nextMonthSpilledDays = new Date(year, month, range).getDay();
-  const currentMonthNumberOfDays = range - nextMonthSpilledDays;
-
-  return currentMonthNumberOfDays;
-};
-
-const getMonthAndYearOfSpillOvers = ({
-  type,
-  month,
-  year,
-}: {
-  month: number;
-  year: number;
-  type: "prev" | "next" | "current";
-}) => {
-  const prevMonth = month === 0 ? 11 : month - 1;
-  const nextMonth = month === 11 ? 0 : month + 1;
-
-  const prevYear = month === 0 ? year - 1 : year;
-  const nextYear = month === 11 ? year + 1 : year;
-
-  switch (type) {
-    case "current":
-      return {
-        monthOfCurrentIndex: month,
-        yearOfCurrentIndex: year,
-      };
-
-    case "prev":
-      return {
-        monthOfCurrentIndex: prevMonth,
-        yearOfCurrentIndex: prevYear,
-      };
-
-    case "next":
-      return {
-        monthOfCurrentIndex: nextMonth,
-        yearOfCurrentIndex: nextYear,
-      };
-  }
-};
 
 export const getDayData = ({
   index,
@@ -99,7 +51,7 @@ export const getDayData = ({
     });
 
   // get the number of days in the current iterations's month
-  const currentIndexMonthNoOfDays = getNumberOfDays(
+  const prevMonthNoOfDays = getNumberOfDays(
     monthOfCurrentIndex,
     yearOfCurrentIndex
   );
@@ -119,42 +71,25 @@ export const getDayData = ({
   // get number of spills of previous month
   const noOfPrevMonthSpills = firstDay - index;
 
+  month === 1 && console.log(prevMonthNoOfDays);
+  
+
   // if the current iteration belongs to previous month
   day = belongsToPrevMonth
     ? // day will be equal to no of days in current iterations's month minus number of spills plus one
-      currentIndexMonthNoOfDays - noOfPrevMonthSpills + 1
+      (prevMonthNoOfDays - noOfPrevMonthSpills) + 1
     : // else if current iteration belongs to next month,
     belongsToNextMonth
     ? // day will be the total number of days of active month subtracted from current index plus one
-      index + 1 - activeMonthNoOfDays
+      (index + 1) - activeMonthNoOfDays
     : // otherwise, the  day will be one plus firstDayOfMonth minus current index
       index - firstDay + 1;
 
   // set day, date and timestamnp
   dayData["day"] = day;
   dayData["date"] = new Date(
-    `${day}/${monthOfCurrentIndex}/${yearOfCurrentIndex}`
+    `${day + 1}/${monthOfCurrentIndex + 1}/${yearOfCurrentIndex}`
   );
 
   return dayData;
-};
-
-export const getMonthDetails = (month: number, year: number) => {
-  const totalBlocks: number = 42;
-  const calendarDays: DayData[] = [];
-
-  const firstDay = getFirstdayOfMonth(month, year);
-
-  for (let index = 0; index < totalBlocks; index++) {
-    const currentDay = getDayData({
-      index,
-      month,
-      year,
-      firstDay,
-    });
-
-    calendarDays.push(currentDay);
-  }
-
-  return calendarDays;
 };
