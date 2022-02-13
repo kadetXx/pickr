@@ -5,13 +5,26 @@ import React, {
   HTMLAttributes,
 } from "react";
 
-import { PickrContainer, PickrSections, PickrPresets, PickrCalendar } from "./Pickr.styles";
-import { Button, Overlay, PresetItem, PresetItemProps } from "./components";
+import {
+  PickrContainer,
+  PickrSections,
+  PickrPresets,
+  PickrCalendar,
+  CalendarBody,
+} from "./Pickr.styles";
+import {
+  Button,
+  Overlay,
+  PresetItem,
+  PresetItemProps,
+  CalendarHead,
+  CalendarDay,
+} from "./components";
 
-import { presetDays } from "./constants";
+import { presetDays, weekDays } from "./constants";
 import PlusIcon from "./svg/icon-plus.svg";
 
-interface Props extends HTMLAttributes<HTMLDivElement> {
+export interface Props extends HTMLAttributes<HTMLDivElement> {
   disabled?: boolean;
   toggle: boolean;
   openByDefault: boolean;
@@ -25,7 +38,8 @@ export const Pickr: React.VFC<Props> = ({
   ...props
 }) => {
   const [showCalendar, setShowCalendar] = useState<boolean>(false);
-  const [activePreset, setActivePreset] = useState<PresetItemProps["presetTitle"]>("Today");
+  const [activePreset, setActivePreset] =
+    useState<PresetItemProps["presetTitle"]>("Today");
 
   const handleClick = (): void => {
     setShowCalendar(!showCalendar);
@@ -44,7 +58,7 @@ export const Pickr: React.VFC<Props> = ({
   }, [openByDefault]);
 
   return (
-    <PickrContainer onBlur={handleBlur}>
+    <PickrContainer disabled={disabled} onBlur={handleBlur}>
       <Button
         selectedDate="Today"
         disabled={disabled}
@@ -65,7 +79,12 @@ export const Pickr: React.VFC<Props> = ({
             ))}
           </PickrPresets>
           <PickrCalendar>
-            Hi
+            <CalendarHead month="November" year={2021} />
+            <CalendarBody>
+              {weekDays.map((item, index) => (
+                <CalendarDay key={index} status="dormant" date={item} />
+              ))}
+            </CalendarBody>
           </PickrCalendar>
         </PickrSections>
       </Overlay>

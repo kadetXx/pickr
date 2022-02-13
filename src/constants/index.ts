@@ -1,1 +1,2 @@
-export * from './presetDays'
+export * from './presetDays';
+export * from './weekDays'
