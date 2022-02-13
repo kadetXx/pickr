@@ -8,7 +8,8 @@ export const PickrContainer = styled.div`
   // colors
   --col-dark: #141400;
   --col-white: #ffffff;
-  --col-grey-500: #F9F9F8;
+  --col-grey-600: #f1f1ef;
+  --col-grey-500: #f9f9f8;
   --col-grey-400: #f3f3f2;
   --col-grey-300: #e3e3e0;
   --col-grey-200: #c8c7c1;
@@ -28,10 +29,10 @@ export const GridSections = styled.div`
   grid-template-columns: ${`${ptr(183)} ${ptr(275)}`};
 `;
 
-export const PresetOptions =  styled.div`
+export const OptionsContainer = styled.div`
   width: 100%;
   min-height: 100%;
   box-sizing: border-box;
   background-color: var(--col-grey-500);
-  padding: ${`${ptr(24)} ${ptr(17)} ${ptr(24)} ${ptr(25)}`}
-`
+  padding: ${`${ptr(24)} ${ptr(17)} ${ptr(24)} ${ptr(25)}`};
+`;

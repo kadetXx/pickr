@@ -4,10 +4,13 @@ import React, {
   useLayoutEffect,
   HTMLAttributes,
 } from "react";
-import { PickrContainer, GridSections, PresetOptions } from "./Pickr.styles";
 
-import { Button, Overlay } from "./components";
+import { PickrContainer, GridSections, OptionsContainer } from "./Pickr.styles";
+import { Button, Overlay, PresetDay, PresetDayProps } from "./components";
+
 import PlusIcon from "./svg/icon-plus.svg";
+import CalendarStarIcon from "./svg/icon-calendar-star.svg";
+import CalendarStarIconTeal from "./svg/icon-calendar-star-teal.svg";
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
   disabled?: boolean;
@@ -23,6 +26,38 @@ export const Pickr: React.VFC<Props> = ({
   ...props
 }) => {
   const [showCalendar, setShowCalendar] = useState<boolean>(false);
+  const presetDays: PresetDayProps[] = [
+    {
+      text: "Today",
+      active: true,
+      icon: CalendarStarIcon,
+      iconAlt: CalendarStarIconTeal,
+    },
+    {
+      text: "Yesterday",
+      active: false,
+      icon: CalendarStarIcon,
+      iconAlt: CalendarStarIconTeal,
+    },
+    {
+      text: "This Monday",
+      active: false,
+      icon: CalendarStarIcon,
+      iconAlt: CalendarStarIconTeal,
+    },
+    {
+      text: "Last Monday",
+      active: false,
+      icon: CalendarStarIcon,
+      iconAlt: CalendarStarIconTeal,
+    },
+    {
+      text: "Custom",
+      active: false,
+      icon: CalendarStarIcon,
+      iconAlt: CalendarStarIconTeal,
+    },
+  ];
 
   const handleClick = () => {
     setShowCalendar(!showCalendar);
@@ -51,7 +86,11 @@ export const Pickr: React.VFC<Props> = ({
       />
       <Overlay visible={showCalendar}>
         <GridSections>
-          <PresetOptions></PresetOptions>
+          <OptionsContainer>
+            {presetDays.map((option, index) => (
+              <PresetDay key={index} {...option} />
+            ))}
+          </OptionsContainer>
         </GridSections>
       </Overlay>
     </PickrContainer>

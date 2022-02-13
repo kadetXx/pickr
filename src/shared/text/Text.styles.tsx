@@ -7,7 +7,7 @@ export const StyledText = styled.p<Pick<TextProps, "color" | "weight" | "size">>
   -moz-osx-font-smoothing: grayscale;
   margin: 0;
   font-family: inherit;
-  font-size: ${props => props.size ? ptr(props.size) : 'inherit'}
-  font-weight: ${(props) => props.weight};
+  font-size: ${props => props.size ? ptr(props.size) : 'inherit'};
+  font-weight: ${(props) => props.weight === 'bold' ? 500 : 400};
   color: ${(props) => `var(--col-${props.color})`};
 `;
