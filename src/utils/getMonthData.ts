@@ -3,11 +3,11 @@ import { getDayData } from "./getDayData";
 import { DayData } from "./getDayData";
 
 export const getMonthDetails = (month: number, year: number) => {
-  const totalBlocks: number = 35;
+  const totalBlocks: number = 42;
   const calendarDays: DayData[] = [];
 
   const firstDay = getFirstdayOfMonth(month, year);
-
+  
   for (let index = 0; index < totalBlocks; index++) {
     const currentDay = getDayData({
       index,
