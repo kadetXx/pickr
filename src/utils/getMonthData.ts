@@ -1,18 +1,9 @@
-import type { Day } from "../constants";
 import { getFirstdayOfMonth } from "./getIndexOfFirstDayOfMonth";
 import { getDayData } from "./getDayData";
-
-interface DayData {
-  weekDay: Day | null;
-  day: number | null;
-  month: number | null;
-  year: number | null;
-  date: Date | null;
-  timeStamp: number | null;
-}
+import { DayData } from "./getDayData";
 
 export const getMonthDetails = (month: number, year: number) => {
-  const totalBlocks: number = 42;
+  const totalBlocks: number = 35;
   const calendarDays: DayData[] = [];
 
   const firstDay = getFirstdayOfMonth(month, year);

@@ -3,12 +3,12 @@ import { weekDays } from "../constants";
 import { getNumberOfDays } from "./getNumberOfDays";
 import { getMonthAndYearOfSpillOvers } from "./getMonthAndYearOfSpillOver";
 
-interface DayData {
+export interface DayData {
   weekDay: Day | null;
-  day: number | null;
+  dayOfMonth: number | null;
   month: number | null;
   year: number | null;
-  date: Date | null;
+  dateString: Date | null;
   timeStamp: number | null;
 }
 
@@ -25,10 +25,10 @@ export const getDayData = ({
 }) => {
   let dayData: DayData = {
     weekDay: null,
-    day: null,
+    dayOfMonth: null,
     month: null,
     year: null,
-    date: null,
+    dateString: null,
     timeStamp: null,
   };
 
@@ -78,18 +78,18 @@ export const getDayData = ({
     : // else if current iteration belongs to next month,
     belongsToNextMonth
     ? // day will be the total number of days of active month subtracted from current index plus one
-      index + 1 - activeMonthNoOfDays
+      index - activeMonthNoOfDays
     : // otherwise, the  day will be one plus firstDayOfMonth minus current index
       index - firstDay + 1;
 
   // set day, date and timestamnp
-  dayData["day"] = day;
+  dayData["dayOfMonth"] = day;
 
   const dateString = new Date(
     `${monthOfCurrentIndex + 1}/${day}/${yearOfCurrentIndex}`
   );
   
-  dayData["date"] = dateString;
+  dayData["dateString"] = dateString;
   dayData["timeStamp"] = dateString.getTime();
   
   return dayData;

@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
 import { ptr } from "./utils";
-import { Props } from "./Pickr";
+import { PickrProps } from "./Pickr";
 
-export const PickrContainer = styled.div<Pick<Props, "disabled">>`
+export const PickrContainer = styled.div<Pick<PickrProps, "disabled">>`
   // font
   @import url("http://fonts.cdnfonts.com/css/sf-pro-display");
 

@@ -12,6 +12,7 @@ import {
   PickrCalendar,
   CalendarBody,
 } from "./Pickr.styles";
+
 import {
   Button,
   Overlay,
@@ -22,17 +23,17 @@ import {
 } from "./components";
 
 import { presetDays, weekDays, months } from "./constants";
-import { getMonthDetails } from './utils'
+import { getMonthDetails, DayData } from './utils'
 import PlusIcon from "./svg/icon-plus.svg";
 
-export interface Props extends HTMLAttributes<HTMLDivElement> {
+export interface PickrProps extends HTMLAttributes<HTMLDivElement> {
   disabled?: boolean;
   toggle: boolean;
   openByDefault: boolean;
   closeOnBlur: boolean;
 }
 
-export const Pickr: React.VFC<Props> = ({
+export const Pickr: React.VFC<PickrProps> = ({
   disabled,
   openByDefault,
   closeOnBlur,
@@ -40,11 +41,8 @@ export const Pickr: React.VFC<Props> = ({
 }) => {
   const [showCalendar, setShowCalendar] = useState<boolean>(false);
   const [activePreset, setActivePreset] = useState<PresetItemProps["presetTitle"]>("Today");
-  const [calendarState, setCalendarState] = useState({
-    day: new Date().getDay(),
-    month: new Date().getMonth(),
-    year: new Date().getFullYear()
-  })
+  const [selectedDay, setSelectedDay] = useState<DayData>();
+  const [calendarState, setCalendarState] = useState<DayData[]>()
 
   const handleClick = (): void => {
     setShowCalendar(!showCalendar);
@@ -62,14 +60,27 @@ export const Pickr: React.VFC<Props> = ({
     openByDefault && setShowCalendar(true);
   }, [openByDefault]);
 
-  useEffect(() => {
-    const test = getMonthDetails(calendarState.month, calendarState.year);
-    console.log(test);
-    console.log(calendarState);
-    
-  }, [calendarState])
-  
 
+  useEffect(() => {
+    const presentDay = new Date().getDate();
+    const presentMonth = new Date().getMonth();
+    const presentYear = new Date().getFullYear();
+    
+
+    const calendar = getMonthDetails(presentMonth, presentYear);
+    setCalendarState(calendar);
+
+    const today = calendar.find((item) => {
+      return (
+        item.dayOfMonth === presentDay &&
+        item.month === presentMonth &&
+        item.year === presentYear
+      );
+    });
+    
+    setSelectedDay(today);
+  }, []);
+  
   return (
     <PickrContainer disabled={disabled} onBlur={handleBlur}>
       <Button
@@ -92,10 +103,28 @@ export const Pickr: React.VFC<Props> = ({
             ))}
           </PickrPresets>
           <PickrCalendar>
-            <CalendarHead month="November" year={2021} />
+            <CalendarHead month="November" year={selectedDay?.year as number} />
             <CalendarBody>
               {weekDays.map((item, index) => (
-                <CalendarDay key={index} status="dormant" date={item.slice(0, 1)} />
+                <CalendarDay
+                  key={index}
+                  status="dormant"
+                  date={item.slice(0, 1)}
+                />
+              ))}
+
+              {calendarState?.map((day, index) => (
+                <CalendarDay
+                  key={index}
+                  status={
+                    day.month === selectedDay?.month
+                      ? "selectable"
+                      : day.timeStamp === selectedDay?.timeStamp
+                      ? "active"
+                      : "dormant"
+                  }
+                  date={day.dayOfMonth as number}
+                />
               ))}
             </CalendarBody>
           </PickrCalendar>
