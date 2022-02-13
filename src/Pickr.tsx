@@ -79,6 +79,16 @@ export const Pickr: React.VFC<PickrProps> = ({
     
     setSelectedDay(today);
   }, []);
+
+  useEffect(() => {
+    if (selectedDay) {
+      const calendar = getMonthDetails(selectedDay?.month!!, selectedDay?.year!!);
+
+      console.log(calendar);
+      setCalendarState(calendar);
+    }
+  }, [selectedDay]);
+  
   
   return (
     <PickrContainer disabled={disabled} onBlur={handleBlur}>
