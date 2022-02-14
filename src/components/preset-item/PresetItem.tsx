@@ -2,12 +2,15 @@ import React, { HTMLAttributes } from "react";
 import { Text, Icon } from "../../shared";
 import { StyledPreset } from "./PresetItem.styles";
 
+import { DayData } from "../../utils";
+
 export interface PresetItemProps extends HTMLAttributes<HTMLDivElement> {
-  active: boolean;
   icon: string;
   iconAlt: string;
+  active: boolean;
   presetTitle: "Today" | "Yesterday" | "This Monday" | "Last Monday" | "Custom";
-  action: (text: this["presetTitle"]) => void;
+  day: DayData;
+  onClick: () => void;
 }
 
 export const PresetItem: React.VFC<PresetItemProps> = ({
@@ -15,10 +18,11 @@ export const PresetItem: React.VFC<PresetItemProps> = ({
   active,
   icon,
   iconAlt,
-  action,
+  day,
+  onClick,
 }) => {
   return (
-    <StyledPreset active={active} onClick={() => action(presetTitle)}>
+    <StyledPreset active={active} onClick={onClick}>
       <Icon width={13.13} height={15} src={active ? iconAlt : icon} />
       <Text
         size={13}

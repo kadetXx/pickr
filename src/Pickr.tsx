@@ -22,8 +22,8 @@ import {
   CalendarDay,
 } from "./components";
 
-import { presetDays, weekDays, months } from "./constants";
-import { useCalendar } from "./hooks";
+import { weekDays, months } from "./constants";
+import { useCalendar, usePresets } from "./hooks";
 
 import PlusIcon from "./svg/icon-plus.svg";
 
@@ -41,26 +41,29 @@ export const Pickr: React.VFC<PickrProps> = ({
   ...props
 }) => {
   const [showCalendar, setShowCalendar] = useState<boolean>(false);
+
   const { selectedDay, setSelectedDay, calendarDays, monthSwitcher } =
     useCalendar();
 
-  const [activePreset, setActivePreset] =
-    useState<PresetItemProps["presetTitle"]>("Today");
+  const { presets, activePreset, setActivePreset } = usePresets(
+    calendarDays,
+    selectedDay
+  );
 
-  const handleClick = (): void => {
-    setShowCalendar(!showCalendar);
-  };
-
+  // handle outside clicks
   const handleBlur = (): void => {
     closeOnBlur && setShowCalendar(false);
   };
 
+  // set default state to open if open by default is true
   useLayoutEffect(() => {
-    // set showcalendar based on custom toggle prop
-    "toggle" in props && setShowCalendar(props.toggle);
-    // set default state to open if open by default is true
     openByDefault && setShowCalendar(true);
-  }, [props.toggle, openByDefault]);
+  }, [props.toggle]);
+
+  // set showcalendar based on custom toggle prop
+  useEffect(() => {
+    "toggle" in props && setShowCalendar(props.toggle);
+  }, []);
 
   return (
     <PickrContainer onBlur={handleBlur}>
@@ -69,17 +72,20 @@ export const Pickr: React.VFC<PickrProps> = ({
         disabled={disabled}
         icon={PlusIcon}
         iconRotation={showCalendar ? 45 : 0}
-        onClick={handleClick}
+        onClick={() => setShowCalendar(!showCalendar)}
       />
       <Overlay visible={showCalendar}>
         <PickrSections>
           <PickrPresets>
-            {presetDays.map((option, index) => (
+            {presets?.map((option, index) => (
               <PresetItem
-                key={index}
-                action={setActivePreset}
-                active={activePreset === option.presetTitle}
                 {...option}
+                key={index}
+                active={activePreset === option.presetTitle}
+                onClick={() => [
+                  setSelectedDay(option.day),
+                  setActivePreset(option.presetTitle),
+                ]}
               />
             ))}
           </PickrPresets>

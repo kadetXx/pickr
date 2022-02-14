@@ -1,23 +1,16 @@
 import React, { useState, useEffect } from "react";
 
 import { getMonthData, DayData } from "../utils";
-import { PresetItemProps } from "../components";
 
 interface CalendarState {
   month: number;
   year: number;
 }
 
-interface Preset {
-  title: PresetItemProps["title"];
-  day: DayData;
-}
-
 export const useCalendar = () => {
   const [selectedDay, setSelectedDay] = useState<DayData>();
   const [calendarDays, setCalendarDays] = useState<DayData[]>();
   const [calendarState, setCalendarState] = useState<CalendarState>();
-  const [presets, setPresets] = useState();
 
   const monthSwitcher = (direction: "prev" | "next"): void => {
     if (!calendarState) {
@@ -45,12 +38,17 @@ export const useCalendar = () => {
 
   // populate calendar and set default selected date to today on mount
   useEffect(() => {
-    const presentDay = new Date().getDate();
-    const presentMonth = new Date().getMonth();
-    const presentYear = new Date().getFullYear();
+    // create new date 
+    const date = new Date();
+    // get preset day
+    const presentDay = date.getDate();
+    const presentMonth = date.getMonth();
+    const presentYear = date.getFullYear();
 
+    // generate calenday days
     const { calendar } = getMonthData(presentMonth, presentYear);
 
+    // grab today's day from generated calendar
     const today = calendar.find((item) => {
       return (
         item.dayOfMonth === presentDay &&
@@ -59,8 +57,13 @@ export const useCalendar = () => {
       );
     });
 
+    // populate calendar days
     setCalendarDays(calendar);
+
+    // set default selected day to today
     setSelectedDay(today);
+
+    // save current calendar month and year
     setCalendarState({
       month: presentMonth,
       year: presentYear,
