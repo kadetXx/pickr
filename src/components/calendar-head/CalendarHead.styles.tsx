@@ -11,7 +11,7 @@ export const Control = styled.button`
   border: none;
   outline: none;
   background-color: transparent;
-  padding: 0;
+  padding: 0 0.5rem;
   width: fit-content;
   height: fit-content;
 `;

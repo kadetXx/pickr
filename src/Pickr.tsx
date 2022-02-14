@@ -34,7 +34,6 @@ export interface PickrProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 interface CalendarState {
-  day: number;
   month: number;
   year: number;
 }
@@ -61,6 +60,32 @@ export const Pickr: React.VFC<PickrProps> = ({
     closeOnBlur && setShowCalendar(false);
   };
 
+  const handleHeadSwitch = (direction: "prev" | "next"): void => {
+    if (!calendarState) {
+      return;
+    }
+    
+    const { month, year } = calendarState;
+
+    let newmonth;
+    let newyear;
+
+    if (direction === "next") {
+      newmonth = month === 11 ? 0 : month + 1;
+      newyear = month === 11 ? year + 1 : year;
+    } else {
+      newmonth = month === 0 ? 11 : month - 1;
+      newyear = month === 0 ? year - 1 : year;
+    }
+
+    console.table({ newmonth, newyear })
+
+    setCalendarState({
+      month: newmonth,
+      year: newyear,
+    });
+  };
+
   useLayoutEffect(() => {
     // check if openbydefault is true and set default state to open
     openByDefault && setShowCalendar(true);
@@ -71,6 +96,7 @@ export const Pickr: React.VFC<PickrProps> = ({
     "toggle" in props && setShowCalendar(props.toggle);
   }, [props.toggle]);
 
+  // populate calendar and set default selected date to today on mount
   useEffect(() => {
     const presentDay = new Date().getDate();
     const presentMonth = new Date().getMonth();
@@ -89,17 +115,20 @@ export const Pickr: React.VFC<PickrProps> = ({
     setCalendarDays(calendar);
     setSelectedDay(today);
     setCalendarState({
-      day: presentDay,
       month: presentMonth,
       year: presentYear,
     });
   }, []);
 
+  // update calendar and selected date each time month or year is manually switched
   useEffect(() => {
-    if (calendarState) {
-      const { day, month, year } = calendarState;
+    if (calendarState && selectedDay?.dayOfMonth) {
+      const { month, year } = calendarState;
+      const { dayOfMonth } = selectedDay;
       const { calendar, numberOfDays } = getMonthData(month, year);
-      const dayToBeSelected = day > numberOfDays ? numberOfDays : day;
+
+      const dayToBeSelected =
+        dayOfMonth > numberOfDays ? numberOfDays : dayOfMonth;
 
       const selected = calendar.find((item) => {
         return (
@@ -114,6 +143,7 @@ export const Pickr: React.VFC<PickrProps> = ({
     }
   }, [calendarState]);
 
+  // update calendar if selected date changes
   useEffect(() => {
     if (selectedDay) {
       const { calendar } = getMonthData(
@@ -150,6 +180,7 @@ export const Pickr: React.VFC<PickrProps> = ({
             <CalendarHead
               month={months[selectedDay?.month || 0]}
               year={selectedDay?.year as number}
+              action={handleHeadSwitch}
             />
             <CalendarBody>
               {weekDays.map((item, index) => (

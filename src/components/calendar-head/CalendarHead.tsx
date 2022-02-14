@@ -7,18 +7,23 @@ import ArrowRight from "../../svg/icon-right.svg";
 export interface CalendarHeadProps extends HTMLAttributes<HTMLDivElement> {
   month: string;
   year: number;
+  action: (direction: "prev" | "next") => void;
 }
 
-export const CalendarHead: React.VFC<CalendarHeadProps> = ({ month, year }) => {
+export const CalendarHead: React.VFC<CalendarHeadProps> = ({
+  month,
+  year,
+  action,
+}) => {
   return (
     <StyledHead>
-      <Control>
+      <Control onClick={() => action("prev")}>
         <Icon src={ArrowLeft} width={5.27} height={8.68} />
       </Control>
       <Text weight="bold" color="grey" size={13}>
         {month}, {year}
       </Text>
-      <Control>
+      <Control onClick={() => action("next")}>
         <Icon src={ArrowRight} width={5.27} height={8.68} />
       </Control>
     </StyledHead>
