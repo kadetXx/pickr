@@ -17,11 +17,13 @@ export const getDayData = ({
   month,
   year,
   firstDay,
+  numberOfDays
 }: {
   index: number;
   month: number;
   year: number;
   firstDay: number;
+  numberOfDays: number;
 }) => {
   let dayData: DayData = {
     weekDay: null,
@@ -36,7 +38,7 @@ export const getDayData = ({
   const prevMonthSpills = firstDay;
 
   // get number of days of active
-  const activeMonthNoOfDays = getNumberOfDays(month, year);
+  const activeMonthNoOfDays = numberOfDays;
 
   // check if current iteration is a spillover
   const belongsToPrevMonth = index < firstDay;

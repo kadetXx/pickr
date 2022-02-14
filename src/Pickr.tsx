@@ -23,7 +23,7 @@ import {
 } from "./components";
 
 import { presetDays, weekDays, months } from "./constants";
-import { getMonthDetails, DayData } from "./utils";
+import { getMonthData, DayData } from "./utils";
 import PlusIcon from "./svg/icon-plus.svg";
 
 export interface PickrProps extends HTMLAttributes<HTMLDivElement> {
@@ -34,6 +34,7 @@ export interface PickrProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 interface CalendarState {
+  day: number;
   month: number;
   year: number;
 }
@@ -66,18 +67,16 @@ export const Pickr: React.VFC<PickrProps> = ({
   }, []);
 
   useEffect(() => {
-   // check if toggle prop was provided and setshow according to toggle
-   "toggle" in props && setShowCalendar(props.toggle);
-  }, [props.toggle])
-  
+    // check if toggle prop was provided and setshow according to toggle
+    "toggle" in props && setShowCalendar(props.toggle);
+  }, [props.toggle]);
 
   useEffect(() => {
     const presentDay = new Date().getDate();
     const presentMonth = new Date().getMonth();
     const presentYear = new Date().getFullYear();
 
-    const calendar = getMonthDetails(presentMonth, presentYear);
-    setCalendarDays(calendar);
+    const { calendar } = getMonthData(presentMonth, presentYear);
 
     const today = calendar.find((item) => {
       return (
@@ -87,19 +86,41 @@ export const Pickr: React.VFC<PickrProps> = ({
       );
     });
 
+    setCalendarDays(calendar);
     setSelectedDay(today);
     setCalendarState({
+      day: presentDay,
       month: presentMonth,
       year: presentYear,
     });
   }, []);
 
   useEffect(() => {
+    if (calendarState) {
+      const { day, month, year } = calendarState;
+      const { calendar, numberOfDays } = getMonthData(month, year);
+      const dayToBeSelected = day > numberOfDays ? numberOfDays : day;
+
+      const selected = calendar.find((item) => {
+        return (
+          item.dayOfMonth === dayToBeSelected &&
+          item.month === month &&
+          item.year === year
+        );
+      });
+
+      setCalendarDays(calendar);
+      setSelectedDay(selected);
+    }
+  }, [calendarState]);
+
+  useEffect(() => {
     if (selectedDay) {
-      const calendar = getMonthDetails(
+      const { calendar } = getMonthData(
         selectedDay?.month!!,
         selectedDay?.year!!
       );
+
       setCalendarDays(calendar);
     }
   }, [selectedDay]);
