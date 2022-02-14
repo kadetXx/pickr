@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
 import { ptr } from "../../utils";
-import { PresetDayProps } from "./PresetDay";
+import { PresetItemProps } from "./PresetItem";
 
-export const StyledPreset = styled.div<Pick<PresetDayProps, "active">>`
+export const StyledPreset = styled.div<Pick<PresetItemProps, "active">>`
   cursor: pointer;
   padding: ${`0 0 0 ${ptr(8)}`};
   display: flex;

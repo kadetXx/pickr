@@ -1,16 +1,23 @@
 import React, { useState, useEffect } from "react";
 
 import { getMonthData, DayData } from "../utils";
+import { PresetItemProps } from "../components";
 
 interface CalendarState {
   month: number;
   year: number;
 }
 
+interface Preset {
+  title: PresetItemProps["title"];
+  day: DayData;
+}
+
 export const useCalendar = () => {
   const [selectedDay, setSelectedDay] = useState<DayData>();
   const [calendarDays, setCalendarDays] = useState<DayData[]>();
   const [calendarState, setCalendarState] = useState<CalendarState>();
+  const [presets, setPresets] = useState();
 
   const monthSwitcher = (direction: "prev" | "next"): void => {
     if (!calendarState) {
