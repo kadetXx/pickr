@@ -12,7 +12,7 @@ export const useCalendar = () => {
   const [calendarDays, setCalendarDays] = useState<DayData[]>();
   const [calendarState, setCalendarState] = useState<CalendarState>();
 
-  const monthSwitcher = (direction: "prev" | "next"): void => {
+  const switcher = (direction: "prev" | "next"): void => {
     if (!calendarState) {
       return;
     }
@@ -109,6 +109,6 @@ export const useCalendar = () => {
     selectedDay,
     setSelectedDay,
     calendarDays,
-    monthSwitcher,
+    switcher,
   };
 };

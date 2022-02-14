@@ -17,7 +17,6 @@ import {
   Button,
   Overlay,
   PresetItem,
-  PresetItemProps,
   CalendarHead,
   CalendarDay,
 } from "./components";
@@ -41,14 +40,8 @@ export const Pickr: React.VFC<PickrProps> = ({
   ...props
 }) => {
   const [showCalendar, setShowCalendar] = useState<boolean>(false);
-
-  const { selectedDay, setSelectedDay, calendarDays, monthSwitcher } =
-    useCalendar();
-
-  const { presets, activePreset, setActivePreset } = usePresets(
-    calendarDays,
-    selectedDay
-  );
+  const { selectedDay, setSelectedDay, calendarDays, switcher } = useCalendar();
+  const { presets, activePreset, setActivePreset } = usePresets(selectedDay);
 
   // handle outside clicks
   const handleBlur = (): void => {
@@ -93,7 +86,7 @@ export const Pickr: React.VFC<PickrProps> = ({
             <CalendarHead
               month={months[selectedDay?.month || 0]}
               year={selectedDay?.year as number}
-              action={monthSwitcher}
+              action={switcher}
             />
             <CalendarBody>
               {weekDays.map((item, index) => (

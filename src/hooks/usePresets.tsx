@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { DayData } from "../utils";
+import { getMonthData, DayData } from "../utils";
 import { PresetItemProps } from "../components";
 
 import CalendarStarIcon from "../svg/icon-calendar-star.svg";
@@ -24,10 +24,7 @@ interface Preset {
 
 type ActivePreset = PresetItemProps["presetTitle"];
 
-export const usePresets = (
-  calendar: DayData[] | undefined,
-  selectedDay: DayData | undefined
-) => {
+export const usePresets = (selectedDay: DayData | undefined) => {
   const [presets, setPresets] = useState<Preset[]>();
   const [activePreset, setActivePreset] = useState<ActivePreset>("Today");
 
@@ -38,7 +35,7 @@ export const usePresets = (
     let lastMonday;
     let custom;
 
-    if (!calendar || !selectedDay) {
+    if (!selectedDay) {
       return;
     }
 
@@ -47,6 +44,9 @@ export const usePresets = (
     const presentDay = date.getDate();
     const presentMonth = date.getMonth();
     const presentYear = date.getFullYear();
+
+    // generate calenday days
+    const { calendar } = getMonthData(presentMonth, presentYear);
 
     // find today in calendar days array
     const indexOfToday = calendar.findIndex((item) => {
@@ -103,7 +103,7 @@ export const usePresets = (
         day: custom,
       },
     ]);
-  }, [calendar, selectedDay]);
+  }, [selectedDay]);
 
   return { presets, activePreset, setActivePreset };
 };
