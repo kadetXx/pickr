@@ -12,9 +12,16 @@ export const CalendarItem: React.VFC<CalendarItemProps> = ({
   status,
   date,
   onClick,
+  ...props
 }) => {
   return (
-    <StyledDay status={status} isClickable={!!onClick} onClick={onClick}>
+    <StyledDay
+      {...props}
+      status={status}
+      isClickable={!!onClick}
+      onClick={onClick}
+      aria-selected={status === 'active'}
+    >
       <Text
         size={13}
         weight="bold"

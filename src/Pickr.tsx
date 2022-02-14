@@ -186,6 +186,9 @@ export const Pickr: React.VFC<PickrProps> = ({
                       ? "selectable"
                       : "dormant"
                   }
+                  title={`${months[day.month as number]} ${day.dayOfMonth}, ${
+                    day.year
+                  }`}
                   date={day.dayOfMonth as number}
                   onClick={() => handleCalenderDayClick(day)}
                 />
