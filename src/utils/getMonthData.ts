@@ -1,6 +1,5 @@
 import { getFirstdayOfMonth } from "./getIndexOfFirstDayOfMonth";
 import { getDayData } from "./getDayData";
-import { DayData } from "./getDayData";
 import { getNumberOfDays } from "./getNumberOfDays";
 
 export const getMonthData = (month: number, year: number) => {

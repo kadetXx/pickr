@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { getMonthData, getThisMonday, getLastMonday, DayData } from "../utils";
+import { getMonthData, getThisMonday, getLastMonday } from "../utils";
 import { PresetItemProps } from "../components";
 
 import CalendarStarIcon from "../svg/icon-calendar-star.svg";

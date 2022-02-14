@@ -1,16 +1,6 @@
-import type { Day } from "../constants";
 import { weekDays } from "../constants";
 import { getNumberOfDays } from "./getNumberOfDays";
 import { getMonthAndYear } from "./getMonthAndYear";
-
-export interface DayData {
-  weekDay: Day | null;
-  dayOfMonth: number | null;
-  month: number | null;
-  year: number | null;
-  dateString: Date | null;
-  timeStamp: number | null;
-}
 
 export const getDayData = ({
   index,

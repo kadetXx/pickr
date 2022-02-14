@@ -1,4 +1,4 @@
-import { getMonthData, DayData } from "../utils";
+import { getMonthData } from "../utils";
 import { getMonthAndYear } from "./getMonthAndYear";
 
 export const getThisMonday = (
@@ -55,6 +55,6 @@ export const getLastMonday = (
     const { calendar: prevMonthCalendar } = getMonthData(month, year);
     const reversed = prevMonthCalendar.reverse();
 
-    return reversed.find(item => item.weekDay === 'Monday');
+    return reversed.find((item) => item.weekDay === "Monday");
   }
 };

@@ -2,8 +2,6 @@ import React, { HTMLAttributes } from "react";
 import { Text, Icon } from "../../shared";
 import { StyledPreset } from "./PresetItem.styles";
 
-import { DayData } from "../../utils";
-
 export interface PresetItemProps extends HTMLAttributes<HTMLDivElement> {
   icon: string;
   iconAlt: string;
