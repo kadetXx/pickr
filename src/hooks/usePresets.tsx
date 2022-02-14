@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { getMonthData, DayData } from "../utils";
+import { getMonthData, getThisMonday, getLastMonday, DayData } from "../utils";
 import { PresetItemProps } from "../components";
 
 import CalendarStarIcon from "../svg/icon-calendar-star.svg";
@@ -58,9 +58,11 @@ export const usePresets = (selectedDay: DayData | undefined) => {
     // get yesterday
     yesterday = calendar[indexOfToday - 1];
 
-    // this monday
+    // grab the nearest monday in front
+    thisMonday = getThisMonday(calendar, indexOfToday, today);
 
     // last monday
+    lastMonday = getLastMonday(calendar, indexOfToday, today);
 
     // set custom to currently selected date
     custom = selectedDay;
@@ -83,7 +85,7 @@ export const usePresets = (selectedDay: DayData | undefined) => {
         icon: CalendarMinusIcon,
         iconAlt: CalendarMinusIconTeal,
         presetTitle: "This Monday",
-        day: today,
+        day: thisMonday!!,
       },
       {
         icon: CalendarMinusIcon,

@@ -1,7 +1,7 @@
 import type { Day } from "../constants";
 import { weekDays } from "../constants";
 import { getNumberOfDays } from "./getNumberOfDays";
-import { getMonthAndYearOfSpillOvers } from "./getMonthAndYearOfSpillOver";
+import { getMonthAndYear } from "./getMonthAndYear";
 
 export interface DayData {
   weekDay: Day | null;
@@ -17,7 +17,7 @@ export const getDayData = ({
   month,
   year,
   firstDay,
-  numberOfDays
+  numberOfDays,
 }: {
   index: number;
   month: number;
@@ -45,16 +45,11 @@ export const getDayData = ({
   const belongsToNextMonth = index - prevMonthSpills >= activeMonthNoOfDays;
 
   // get the correct day of the month and correct year of the current iteration
-  const { monthOfCurrentIndex, yearOfCurrentIndex } =
-    getMonthAndYearOfSpillOvers({
-      month,
-      year,
-      type: belongsToPrevMonth
-        ? "prev"
-        : belongsToNextMonth
-        ? "next"
-        : "current",
-    });
+  const [monthOfCurrentIndex, yearOfCurrentIndex] = getMonthAndYear({
+    month,
+    year,
+    type: belongsToPrevMonth ? "prev" : belongsToNextMonth ? "next" : "current",
+  });
 
   // get the number of days in the current iterations's month
   const prevMonthNoOfDays = getNumberOfDays(

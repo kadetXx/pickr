@@ -1,4 +1,4 @@
-export const getMonthAndYearOfSpillOvers = ({
+export const getMonthAndYear = ({
   type,
   month,
   year,
@@ -15,21 +15,12 @@ export const getMonthAndYearOfSpillOvers = ({
 
   switch (type) {
     case "current":
-      return {
-        monthOfCurrentIndex: month,
-        yearOfCurrentIndex: year,
-      };
+      return [month, year];
 
     case "prev":
-      return {
-        monthOfCurrentIndex: prevMonth,
-        yearOfCurrentIndex: prevYear,
-      };
+      return [prevMonth, prevYear];
 
     case "next":
-      return {
-        monthOfCurrentIndex: nextMonth,
-        yearOfCurrentIndex: nextYear,
-      };
+      return [nextMonth, nextYear];
   }
 };
