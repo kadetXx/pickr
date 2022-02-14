@@ -23,7 +23,7 @@ import {
 } from "./components";
 
 import { presetDays, weekDays, months } from "./constants";
-import { useCalendar } from './hooks'
+import { useCalendar } from "./hooks";
 
 import PlusIcon from "./svg/icon-plus.svg";
 
@@ -41,7 +41,8 @@ export const Pickr: React.VFC<PickrProps> = ({
   ...props
 }) => {
   const [showCalendar, setShowCalendar] = useState<boolean>(false);
-  const { selectedDay, setSelectedDay, calendarDays, monthSwitcher } = useCalendar();
+  const { selectedDay, setSelectedDay, calendarDays, monthSwitcher } =
+    useCalendar();
 
   const [activePreset, setActivePreset] =
     useState<PresetItemProps["presetTitle"]>("Today");
@@ -55,12 +56,11 @@ export const Pickr: React.VFC<PickrProps> = ({
   };
 
   useLayoutEffect(() => {
-    openByDefault && setShowCalendar(true);
-  }, []);
-
-  useEffect(() => {
+    // set showcalendar based on custom toggle prop
     "toggle" in props && setShowCalendar(props.toggle);
-  }, [props.toggle]);
+    // set default state to open if open by default is true
+    openByDefault && setShowCalendar(true);
+  }, [props.toggle, openByDefault]);
 
   return (
     <PickrContainer onBlur={handleBlur}>
