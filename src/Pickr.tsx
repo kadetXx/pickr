@@ -23,7 +23,7 @@ import {
 } from "./components";
 
 import { presetDays, weekDays, months } from "./constants";
-import { getMonthDetails, DayData } from './utils'
+import { getMonthDetails, DayData } from "./utils";
 import PlusIcon from "./svg/icon-plus.svg";
 
 export interface PickrProps extends HTMLAttributes<HTMLDivElement> {
@@ -33,6 +33,11 @@ export interface PickrProps extends HTMLAttributes<HTMLDivElement> {
   closeOnBlur: boolean;
 }
 
+interface CalendarState {
+  month: number;
+  year: number;
+}
+
 export const Pickr: React.VFC<PickrProps> = ({
   disabled,
   openByDefault,
@@ -40,9 +45,12 @@ export const Pickr: React.VFC<PickrProps> = ({
   ...props
 }) => {
   const [showCalendar, setShowCalendar] = useState<boolean>(false);
-  const [activePreset, setActivePreset] = useState<PresetItemProps["presetTitle"]>("Today");
   const [selectedDay, setSelectedDay] = useState<DayData>();
-  const [calendarState, setCalendarState] = useState<DayData[]>()
+  const [calendarDays, setCalendarDays] = useState<DayData[]>();
+  const [calendarState, setCalendarState] = useState<CalendarState>();
+
+  const [activePreset, setActivePreset] =
+    useState<PresetItemProps["presetTitle"]>("Today");
 
   const handleClick = (): void => {
     setShowCalendar(!showCalendar);
@@ -52,22 +60,24 @@ export const Pickr: React.VFC<PickrProps> = ({
     closeOnBlur && setShowCalendar(false);
   };
 
-  useEffect(() => {
-    "toggle" in props && setShowCalendar(props.toggle);
-  }, [props.toggle]);
-
   useLayoutEffect(() => {
+    // check if openbydefault is true and set default state to open
     openByDefault && setShowCalendar(true);
-  }, [openByDefault]);
+  }, []);
 
+  useEffect(() => {
+   // check if toggle prop was provided and setshow according to toggle
+   "toggle" in props && setShowCalendar(props.toggle);
+  }, [props.toggle])
+  
 
   useEffect(() => {
     const presentDay = new Date().getDate();
     const presentMonth = new Date().getMonth();
     const presentYear = new Date().getFullYear();
-    
+
     const calendar = getMonthDetails(presentMonth, presentYear);
-    setCalendarState(calendar);
+    setCalendarDays(calendar);
 
     const today = calendar.find((item) => {
       return (
@@ -76,20 +86,26 @@ export const Pickr: React.VFC<PickrProps> = ({
         item.year === presentYear
       );
     });
-    
+
     setSelectedDay(today);
+    setCalendarState({
+      month: presentMonth,
+      year: presentYear,
+    });
   }, []);
 
   useEffect(() => {
     if (selectedDay) {
-      const calendar = getMonthDetails(selectedDay?.month!!, selectedDay?.year!!);
-      setCalendarState(calendar);
+      const calendar = getMonthDetails(
+        selectedDay?.month!!,
+        selectedDay?.year!!
+      );
+      setCalendarDays(calendar);
     }
   }, [selectedDay]);
-  
-  
+
   return (
-    <PickrContainer disabled={disabled} onBlur={handleBlur}>
+    <PickrContainer onBlur={handleBlur}>
       <Button
         selectedDate="Today"
         disabled={disabled}
@@ -110,7 +126,10 @@ export const Pickr: React.VFC<PickrProps> = ({
             ))}
           </PickrPresets>
           <PickrCalendar>
-            <CalendarHead month="November" year={selectedDay?.year as number} />
+            <CalendarHead
+              month={months[selectedDay?.month || 0]}
+              year={selectedDay?.year as number}
+            />
             <CalendarBody>
               {weekDays.map((item, index) => (
                 <CalendarDay
@@ -120,7 +139,7 @@ export const Pickr: React.VFC<PickrProps> = ({
                 />
               ))}
 
-              {calendarState?.map((day, index) => (
+              {calendarDays?.map((day, index) => (
                 <CalendarDay
                   key={index}
                   status={

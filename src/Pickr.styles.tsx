@@ -1,8 +1,7 @@
 import styled from "@emotion/styled";
 import { ptr } from "./utils";
-import { PickrProps } from "./Pickr";
 
-export const PickrContainer = styled.div<Pick<PickrProps, "disabled">>`
+export const PickrContainer = styled.div`
   // font
   @import url("http://fonts.cdnfonts.com/css/sf-pro-display");
 
@@ -21,10 +20,6 @@ export const PickrContainer = styled.div<Pick<PickrProps, "disabled">>`
   width: fit-content;
   position: relative;
   font-family: "SF Pro Display", sans-serif;
-
-  opacity: ${(props) => (props.disabled ? 0.5 : "initial")};
-  pointer-events: ${(props) => (props.disabled ? "none" : "initial")};
-  user-select: ${(props) => (props.disabled ? "none" : "initial")};
 `;
 
 export const PickrSections = styled.div`
@@ -61,4 +56,4 @@ export const CalendarBody = styled.div`
   display: grid;
   height: fit-content;
   grid-template-columns: repeat(7, 1fr);
-`
+`;
