@@ -2,7 +2,7 @@ export const formatDate = (
   day: number,
   month: number,
   year: number,
-  format: DateFormat = "ddmmyy"
+  format: DateFormat
 ): DDMMYY => {
   // extend number object to include padding function
   const pad = (value: number) => {
@@ -14,7 +14,7 @@ export const formatDate = (
   const paddedMonth = pad(month);
 
   const allFormats = {
-    ddmmyy: `${paddedDay}/${paddedMonth}${year}`,
+    ddmmyy: `${paddedDay}/${paddedMonth}/${year}`,
     mmddyy: `${paddedMonth}/${paddedDay}/${year}`,
     yymmdd: `${year}/${paddedMonth}/${paddedDay}`,
   };

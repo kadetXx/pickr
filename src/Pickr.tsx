@@ -30,10 +30,10 @@ import PlusIcon from "./svg/icon-plus.svg";
 
 export interface PickrProps extends HTMLAttributes<HTMLDivElement> {
   disabled?: boolean;
-  toggleCalendar: boolean;
-  openByDefault: boolean;
-  closeOnBlur: boolean;
-  format: DateFormat;
+  toggleCalendar?: boolean;
+  openByDefault?: boolean;
+  closeOnBlur?: boolean;
+  format?: DateFormat;
   onDateChange: (dateString: Date, date: DDMMYY) => void;
 }
 
@@ -43,7 +43,7 @@ export const Pickr: React.VFC<PickrProps> = ({
   closeOnBlur,
   onSelect,
   onDateChange,
-  format,
+  format = "ddmmyy",
   ...props
 }) => {
   const pickrRef = useRef<HTMLDivElement>(null);
@@ -105,7 +105,7 @@ export const Pickr: React.VFC<PickrProps> = ({
 
   // set showcalendar based on custom toggle prop
   useEffect(() => {
-    "toggle" in props && setShowCalendar(props.toggleCalendar);
+    "toggle" in props && setShowCalendar(!!props.toggleCalendar);
   }, []);
 
   // close dropdown on blur
