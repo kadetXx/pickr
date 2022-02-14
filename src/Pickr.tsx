@@ -58,6 +58,31 @@ export const Pickr: React.VFC<PickrProps> = ({
     "toggle" in props && setShowCalendar(props.toggle);
   }, []);
 
+  // change active preset to custom if selected date is not among presets
+  useEffect(() => {
+    if (!selectedDay || !presets) return;
+
+    // grab timestamps of all presets
+    const definitePresets = presets.map((item) => item.day.timeStamp);
+
+    // check if timestamp of currently selected matches any of the presets
+    const isADefinitePreset = definitePresets?.includes(selectedDay?.timeStamp);
+
+    // if there's a match
+    if (isADefinitePreset) {
+      // grab the item that matched from preset lists
+      const active = presets.find(
+        (item) => item.day.timeStamp === selectedDay.timeStamp
+      );
+
+      // set active preset to the matched item
+      !!active && setActivePreset(active.presetTitle);
+    } else {
+      // othewise, if there's no match, set active preset to custom
+      setActivePreset("Custom");
+    }
+  }, [selectedDay]);
+
   return (
     <PickrContainer onBlur={handleBlur}>
       <Button

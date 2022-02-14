@@ -13,9 +13,7 @@ export const useCalendar = () => {
   const [calendarState, setCalendarState] = useState<CalendarState>();
 
   const switcher = (direction: "prev" | "next"): void => {
-    if (!calendarState) {
-      return;
-    }
+    if (!calendarState) return;
 
     const { month, year } = calendarState;
 
@@ -38,7 +36,7 @@ export const useCalendar = () => {
 
   // populate calendar and set default selected date to today on mount
   useEffect(() => {
-    // create new date 
+    // create new date
     const date = new Date();
     // get preset day
     const presentDay = date.getDate();

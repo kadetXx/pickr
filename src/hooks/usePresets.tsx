@@ -35,9 +35,7 @@ export const usePresets = (selectedDay: DayData | undefined) => {
     let lastMonday;
     let custom;
 
-    if (!selectedDay) {
-      return;
-    }
+    if (!selectedDay) return;
 
     // get today
     const date = new Date();
