@@ -16,11 +16,11 @@ export const PresetItem: React.VFC<PresetItemProps> = ({
   active,
   icon,
   iconAlt,
-  day,
   onClick,
+  ...props
 }) => {
   return (
-    <StyledPreset active={active} onClick={onClick}>
+    <StyledPreset {...props} active={active} onClick={onClick}>
       <Icon width={13.13} height={15} src={active ? iconAlt : icon} />
       <Text
         size={13}

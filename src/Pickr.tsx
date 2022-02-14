@@ -92,6 +92,10 @@ export const Pickr: React.VFC<PickrProps> = ({
     return activePreset === "Custom" ? formatted : activePreset;
   };
 
+  const getTitle = (day: DayData) => {
+    return `${months[day.month as number]} ${day.dayOfMonth}, ${day.year}`;
+  };
+
   // set default state to open if open by default is true
   useLayoutEffect(() => {
     openByDefault && setShowCalendar(true);
@@ -144,6 +148,7 @@ export const Pickr: React.VFC<PickrProps> = ({
         disabled={disabled}
         icon={PlusIcon}
         iconRotation={showCalendar ? 45 : 0}
+        title="Datepicker"
         onClick={() => setShowCalendar(!showCalendar)}
       />
       <Overlay visible={showCalendar}>
@@ -153,6 +158,7 @@ export const Pickr: React.VFC<PickrProps> = ({
               <PresetItem
                 {...option}
                 key={index}
+                title={getTitle(option.day)}
                 active={activePreset === option.presetTitle}
                 onClick={() => [
                   setSelectedDay(option.day),
@@ -186,9 +192,7 @@ export const Pickr: React.VFC<PickrProps> = ({
                       ? "selectable"
                       : "dormant"
                   }
-                  title={`${months[day.month as number]} ${day.dayOfMonth}, ${
-                    day.year
-                  }`}
+                  title={getTitle(day)}
                   date={day.dayOfMonth as number}
                   onClick={() => handleCalenderDayClick(day)}
                 />
