@@ -18,7 +18,7 @@ import {
   Overlay,
   PresetItem,
   CalendarHead,
-  CalendarDay,
+  CalendarItem,
 } from "./components";
 
 import { weekDays, months } from "./constants";
@@ -115,7 +115,7 @@ export const Pickr: React.VFC<PickrProps> = ({
             />
             <CalendarBody>
               {weekDays.map((item, index) => (
-                <CalendarDay
+                <CalendarItem
                   key={index}
                   status="dormant"
                   date={item.slice(0, 1)}
@@ -123,7 +123,7 @@ export const Pickr: React.VFC<PickrProps> = ({
               ))}
 
               {calendarDays?.map((day, index) => (
-                <CalendarDay
+                <CalendarItem
                   key={index}
                   status={
                     day.timeStamp === selectedDay?.timeStamp

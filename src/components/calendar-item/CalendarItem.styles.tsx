@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
 import { ptr } from "../../utils";
-import { CalendarDayProps } from "./CalendarDay";
+import { CalendarItemProps } from "./CalendarItem";
 
-interface StyledDayProps extends Pick<CalendarDayProps, "status"> {
+interface StyledDayProps extends Pick<CalendarItemProps, "status"> {
   isClickable: boolean;
 }
 

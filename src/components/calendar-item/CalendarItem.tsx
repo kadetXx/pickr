@@ -1,14 +1,14 @@
 import React, { HTMLAttributes } from "react";
-import { StyledDay } from "./CalendarDay.styles";
+import { StyledDay } from "./CalendarItem.styles";
 import { Text } from "../../shared";
 
-export interface CalendarDayProps extends HTMLAttributes<HTMLDivElement> {
+export interface CalendarItemProps extends HTMLAttributes<HTMLDivElement> {
   date: string | number;
   status: "active" | "selectable" | "dormant";
   onClick?: () => void;
 }
 
-export const CalendarDay: React.VFC<CalendarDayProps> = ({
+export const CalendarItem: React.VFC<CalendarItemProps> = ({
   status,
   date,
   onClick,
