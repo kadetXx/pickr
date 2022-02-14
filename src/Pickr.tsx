@@ -78,8 +78,6 @@ export const Pickr: React.VFC<PickrProps> = ({
       newyear = month === 0 ? year - 1 : year;
     }
 
-    console.table({ newmonth, newyear })
-
     setCalendarState({
       month: newmonth,
       year: newyear,
