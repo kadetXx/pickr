@@ -91,7 +91,7 @@ export const usePresets = (selectedDay: DayData | undefined) => {
         icon: CalendarMinusIcon,
         iconAlt: CalendarMinusIconTeal,
         presetTitle: "Last Monday",
-        day: today,
+        day: lastMonday!!,
       },
       {
         icon: CalendarEditIcon,
