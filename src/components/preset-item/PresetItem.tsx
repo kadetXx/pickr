@@ -1,8 +1,9 @@
-import React, { HTMLAttributes } from "react";
+import React, { ButtonHTMLAttributes } from "react";
 import { Text, Icon } from "../../shared";
 import { StyledPreset } from "./PresetItem.styles";
 
-export interface PresetItemProps extends HTMLAttributes<HTMLDivElement> {
+export interface PresetItemProps
+  extends ButtonHTMLAttributes<HTMLButtonElement> {
   icon: string;
   iconAlt: string;
   active: boolean;
