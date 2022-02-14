@@ -14,11 +14,12 @@ export const StyledPreset = styled.button<Pick<PresetItemProps, "active">>`
   height: ${ptr(32)};
   border: unset;
   outline: none;
-  transition: opacity 0.2s linear;
+  transition: all 0.1s linear;
   background-color: ${(props) =>
     props.active ? "var(--col-grey-600)" : "initial"};
 
   &:hover {
-    opacity: ${props => !props.active ? 0.7 : 1 }
+    background-color: ${(props) =>
+      !props.active ? "var(--col-grey-400)" : "var(--col-grey-600)"};
   }
 `;
