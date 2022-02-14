@@ -1,3 +1,5 @@
+type DDMMYY = `${number}/${number}/${number}`;
+
 type Day =
   | "Monday"
   | "Tuesday"

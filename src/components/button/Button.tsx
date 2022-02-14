@@ -5,24 +5,19 @@ import { StyledButton } from "./Button.styles";
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   icon?: string;
   iconRotation?: number;
-  selectedDate:
-    | "Today"
-    | "Yesterday"
-    | "This Monday"
-    | "Last Monday"
-    | `${number}/${number}/${number}`;
+  text: "Today" | "Yesterday" | "This Monday" | "Last Monday" | DDMMYY;
 }
 
 export const Button: React.VFC<ButtonProps> = ({
   icon,
   iconRotation,
-  selectedDate,
+  text,
   ...props
 }) => {
   return (
     <StyledButton {...props}>
       <Text size={13} color="grey">
-        {selectedDate}
+        {text}
       </Text>
 
       {icon && (

@@ -88,10 +88,21 @@ export const Pickr: React.VFC<PickrProps> = ({
     }
   };
 
+  const getButtonText = () => {
+    if (!selectedDay) {
+      return "Today";
+    }
+
+    const { dayOfMonth, month, year } = selectedDay;
+    const ddmmyy: DDMMYY = `${dayOfMonth!!}/${month!! + 1}/${year!!}`;
+
+    return activePreset === "Custom" ? ddmmyy : activePreset;
+  };
+
   return (
     <PickrContainer onBlur={handleBlur}>
       <Button
-        selectedDate="Today"
+        text={getButtonText()}
         disabled={disabled}
         icon={PlusIcon}
         iconRotation={showCalendar ? 45 : 0}
