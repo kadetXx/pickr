@@ -1,6 +1,7 @@
 import React, {
   useState,
   useEffect,
+  useRef,
   useLayoutEffect,
   HTMLAttributes,
 } from "react";
@@ -39,24 +40,10 @@ export const Pickr: React.VFC<PickrProps> = ({
   closeOnBlur,
   ...props
 }) => {
+  const pickrRef = useRef<HTMLDivElement>(null);
   const [showCalendar, setShowCalendar] = useState<boolean>(false);
   const { selectedDay, setSelectedDay, calendarDays, switcher } = useCalendar();
   const { presets, activePreset, setActivePreset } = usePresets(selectedDay);
-
-  // handle outside clicks
-  const handleBlur = (): void => {
-    closeOnBlur && setShowCalendar(false);
-  };
-
-  // set default state to open if open by default is true
-  useLayoutEffect(() => {
-    openByDefault && setShowCalendar(true);
-  }, [props.toggle]);
-
-  // set showcalendar based on custom toggle prop
-  useEffect(() => {
-    "toggle" in props && setShowCalendar(props.toggle);
-  }, []);
 
   // update selected date when calendar item is clicked
   // and also change active preset to custom if selected date is not among presets
@@ -105,8 +92,42 @@ export const Pickr: React.VFC<PickrProps> = ({
     return activePreset === "Custom" ? ddmmyy : activePreset;
   };
 
+  // set default state to open if open by default is true
+  useLayoutEffect(() => {
+    openByDefault && setShowCalendar(true);
+  }, [props.toggle]);
+
+  // set showcalendar based on custom toggle prop
+  useEffect(() => {
+    "toggle" in props && setShowCalendar(props.toggle);
+  }, []);
+
+  useEffect(() => {
+    // exit if close on blur is false
+    if (!!closeOnBlur === false) return;
+
+    const handleClick = (e: MouseEvent) => {
+      // exit if calendar is currently not shown
+      if (showCalendar === false) return;
+
+      // get classname of main pickr parent container
+      const parentClassname = pickrRef.current?.className;
+      // get clicked element
+      const target = e.target as HTMLElement;
+
+      // check if clicked item is a decendant of main pickr parent container
+      const isDescendant = target?.closest(`.${parentClassname}`);
+
+      // close picker if clicked element isn't a decendant of main pickr parent
+      !isDescendant && setShowCalendar(false);
+    };
+
+    window.addEventListener("click", handleClick);
+    return () => window.removeEventListener("click", handleClick);
+  }, [showCalendar, closeOnBlur]);
+
   return (
-    <PickrContainer onBlur={handleBlur}>
+    <PickrContainer ref={pickrRef}>
       <Button
         text={getButtonText()}
         disabled={disabled}
