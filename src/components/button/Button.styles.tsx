@@ -21,4 +21,8 @@ export const StyledButton = styled.button<Pick<ButtonProps, 'disabled'>>`
   pointer-events: ${(props) => (props.disabled ? "none" : "initial")};
   user-select: ${(props) => (props.disabled ? "none" : "initial")};
   background-color: ${props => props.disabled ? 'var(--col-grey-300)' : 'var(--col-white)'};
+
+  &:focus {
+    outline: 1px solid var(--col-teal);
+  }
 `;
