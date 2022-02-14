@@ -83,8 +83,6 @@ export const Pickr: React.VFC<PickrProps> = ({
   useEffect(() => {
     if (selectedDay) {
       const calendar = getMonthDetails(selectedDay?.month!!, selectedDay?.year!!);
-
-      console.log(calendar);
       setCalendarState(calendar);
     }
   }, [selectedDay]);

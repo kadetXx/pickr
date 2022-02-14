@@ -32,11 +32,15 @@ export const getDayData = ({
     timeStamp: null,
   };
 
+  // get number of spills of previous month
+  const prevMonthSpills = firstDay;
+
+  // get number of days of active
   const activeMonthNoOfDays = getNumberOfDays(month, year);
 
   // check if current iteration is a spillover
   const belongsToPrevMonth = index < firstDay;
-  const belongsToNextMonth = index > activeMonthNoOfDays;
+  const belongsToNextMonth = index - prevMonthSpills >= activeMonthNoOfDays;
 
   // get the correct day of the month and correct year of the current iteration
   const { monthOfCurrentIndex, yearOfCurrentIndex } =
@@ -68,19 +72,17 @@ export const getDayData = ({
   // to the active month, the previous month or the next month;
   let day: number;
 
-  // get number of spills of previous month
-  const noOfPrevMonthSpills = firstDay - index;
+  // calculate day of the monthif day belongs to previous month
+  const prevMonthDay = prevMonthNoOfDays - prevMonthSpills + index + 1;
+  // calculate day of the monthif day belongs to previous month
+  const nextMonthDay = ((index - prevMonthSpills) % activeMonthNoOfDays) + 1;
 
   // if the current iteration belongs to previous month
   day = belongsToPrevMonth
-    ? // day will be equal to no of days in current iterations's month minus number of spills plus one
-      prevMonthNoOfDays - noOfPrevMonthSpills + 1
-    : // else if current iteration belongs to next month,
-    belongsToNextMonth
-    ? // day will be the total number of days of active month subtracted from current index plus one
-      index - activeMonthNoOfDays
-    : // otherwise, the  day will be one plus firstDayOfMonth minus current index
-      index - firstDay + 1;
+    ? prevMonthDay // previous month day will be used
+    : belongsToNextMonth // else if current iteration belongs to next month,
+    ? nextMonthDay // next month day will be used
+    : index - firstDay + 1; // otherwise, the  day will be current index minus firstDayOfMonth plus one
 
   // set day, date and timestamnp
   dayData["dayOfMonth"] = day;
@@ -88,9 +90,9 @@ export const getDayData = ({
   const dateString = new Date(
     `${monthOfCurrentIndex + 1}/${day}/${yearOfCurrentIndex}`
   );
-  
+
   dayData["dateString"] = dateString;
   dayData["timeStamp"] = dateString.getTime();
-  
+
   return dayData;
 };
