@@ -93,8 +93,14 @@ export const Pickr: React.VFC<PickrProps> = ({
       return "Today";
     }
 
+    // extend number object to include padding function
+    const pad = (value: number) => {
+      const padded = ("0" + value).slice(-2);
+      return padded;
+    };
+
     const { dayOfMonth, month, year } = selectedDay;
-    const ddmmyy: DDMMYY = `${dayOfMonth!!}/${month!! + 1}/${year!!}`;
+    const ddmmyy: DDMMYY = `${pad(dayOfMonth!!)}/${pad(month!! + 1)}/${year!!}`;
 
     return activePreset === "Custom" ? ddmmyy : activePreset;
   };

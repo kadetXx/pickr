@@ -1,4 +1,4 @@
-type DDMMYY = `${number}/${number}/${number}`;
+type DDMMYY = `${string}/${string}/${number}`;
 
 type Day =
   | "Monday"
