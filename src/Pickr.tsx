@@ -58,21 +58,26 @@ export const Pickr: React.VFC<PickrProps> = ({
     "toggle" in props && setShowCalendar(props.toggle);
   }, []);
 
-  // change active preset to custom if selected date is not among presets
-  useEffect(() => {
-    if (!selectedDay || !presets) return;
+  // update selected date when calendar item is clicked
+  // and also change active preset to custom if selected date is not among presets
+  const handleCalenderDayClick = (day: DayData) => {
+    // return if presets is absent or the clicked day is already selected
+    if (!presets || day.timeStamp === selectedDay?.timeStamp) return;
+
+    // update state
+    setSelectedDay(day);
 
     // grab timestamps of all presets
     const definitePresets = presets.map((item) => item.day.timeStamp);
 
     // check if timestamp of currently selected matches any of the presets
-    const isADefinitePreset = definitePresets?.includes(selectedDay?.timeStamp);
+    const isADefinitePreset = definitePresets?.includes(day?.timeStamp);
 
     // if there's a match
     if (isADefinitePreset) {
       // grab the item that matched from preset lists
       const active = presets.find(
-        (item) => item.day.timeStamp === selectedDay.timeStamp
+        (item) => item.day.timeStamp === day.timeStamp
       );
 
       // set active preset to the matched item
@@ -81,7 +86,7 @@ export const Pickr: React.VFC<PickrProps> = ({
       // othewise, if there's no match, set active preset to custom
       setActivePreset("Custom");
     }
-  }, [selectedDay]);
+  };
 
   return (
     <PickrContainer onBlur={handleBlur}>
@@ -133,7 +138,7 @@ export const Pickr: React.VFC<PickrProps> = ({
                       : "dormant"
                   }
                   date={day.dayOfMonth as number}
-                  onClick={() => setSelectedDay(day)}
+                  onClick={() => handleCalenderDayClick(day)}
                 />
               ))}
             </CalendarBody>
