@@ -146,6 +146,8 @@ export const Pickr: React.VFC<PickrProps> = ({
       <Button
         text={getButtonText()}
         disabled={disabled}
+        aria-disabled={disabled}
+        aria-label="Datepicker"
         icon={PlusIcon}
         iconRotation={showCalendar ? 45 : 0}
         title="Datepicker"

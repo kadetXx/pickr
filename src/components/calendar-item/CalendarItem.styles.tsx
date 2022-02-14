@@ -12,9 +12,8 @@ export const StyledDay = styled.span<StyledDayProps>`
   display: grid;
   place-items: center;
   border-radius: 6px;
-  
+  outline: none;
   cursor: ${(props) => (props.isClickable ? "pointer" : "initial")};
-  
   background-color: ${(props) =>
     props.status === "active" ? "var(--col-teal)" : "transparent"};
 
