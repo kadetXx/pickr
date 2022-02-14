@@ -8,7 +8,7 @@ export const getThisMonday = (
 ) => {
   if (!today.month || !today.year) return;
 
-  const calendarFromToday = calendar.slice(indexOfToday + 1);
+  const calendarFromToday = calendar.slice(indexOfToday);
   const monday = calendarFromToday.find((item) => item.weekDay === "Monday");
 
   if (monday) {

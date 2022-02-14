@@ -21,6 +21,12 @@ type Month =
   | "November"
   | "December";
 
+type PresetTitle =
+  | "Today"
+  | "Yesterday"
+  | "This Monday"
+  | "Last Monday"
+  | "Custom";
 interface DayData {
   weekDay: Day | null;
   dayOfMonth: number | null;

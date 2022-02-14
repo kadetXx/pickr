@@ -6,7 +6,7 @@ export interface PresetItemProps extends HTMLAttributes<HTMLDivElement> {
   icon: string;
   iconAlt: string;
   active: boolean;
-  presetTitle: "Today" | "Yesterday" | "This Monday" | "Last Monday" | "Custom";
+  presetTitle: PresetTitle;
   day: DayData;
   onClick: () => void;
 }

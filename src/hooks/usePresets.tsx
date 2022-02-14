@@ -19,11 +19,9 @@ interface Preset {
   presetTitle: PresetItemProps["presetTitle"];
 }
 
-type ActivePreset = PresetItemProps["presetTitle"];
-
 export const usePresets = (selectedDay: DayData | undefined) => {
   const [presets, setPresets] = useState<Preset[]>();
-  const [activePreset, setActivePreset] = useState<ActivePreset>("Today");
+  const [activePreset, setActivePreset] = useState<PresetTitle>("Today");
 
   useEffect(() => {
     let today;
