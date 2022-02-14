@@ -24,20 +24,26 @@ import {
 
 import { weekDays, months } from "./constants";
 import { useCalendar, usePresets } from "./hooks";
+import { formatDate } from "./utils";
 
 import PlusIcon from "./svg/icon-plus.svg";
 
 export interface PickrProps extends HTMLAttributes<HTMLDivElement> {
   disabled?: boolean;
-  toggle: boolean;
+  toggleCalendar: boolean;
   openByDefault: boolean;
   closeOnBlur: boolean;
+  format: DateFormat;
+  onDateChange: (dateString: Date, date: DDMMYY) => void;
 }
 
 export const Pickr: React.VFC<PickrProps> = ({
   disabled,
   openByDefault,
   closeOnBlur,
+  onSelect,
+  onDateChange,
+  format,
   ...props
 }) => {
   const pickrRef = useRef<HTMLDivElement>(null);
@@ -87,21 +93,22 @@ export const Pickr: React.VFC<PickrProps> = ({
     };
 
     const { dayOfMonth, month, year } = selectedDay;
-    const ddmmyy: DDMMYY = `${pad(dayOfMonth!!)}/${pad(month!! + 1)}/${year!!}`;
+    const formatted = formatDate(dayOfMonth!!, month!!, year!!, format);
 
-    return activePreset === "Custom" ? ddmmyy : activePreset;
+    return activePreset === "Custom" ? formatted : activePreset;
   };
 
   // set default state to open if open by default is true
   useLayoutEffect(() => {
     openByDefault && setShowCalendar(true);
-  }, [props.toggle]);
+  }, [props.toggleCalendar]);
 
   // set showcalendar based on custom toggle prop
   useEffect(() => {
-    "toggle" in props && setShowCalendar(props.toggle);
+    "toggle" in props && setShowCalendar(props.toggleCalendar);
   }, []);
 
+  // close dropdown on blur
   useEffect(() => {
     // exit if close on blur is false
     if (!!closeOnBlur === false) return;
@@ -125,6 +132,16 @@ export const Pickr: React.VFC<PickrProps> = ({
     window.addEventListener("click", handleClick);
     return () => window.removeEventListener("click", handleClick);
   }, [showCalendar, closeOnBlur]);
+
+  // return value of date
+  useEffect(() => {
+    if (!selectedDay) return;
+
+    const { dayOfMonth, month, year } = selectedDay;
+    const formatted = formatDate(dayOfMonth!!, month!!, year!!, format);
+
+    onDateChange(selectedDay?.dateString!!, formatted);
+  }, [selectedDay]);
 
   return (
     <PickrContainer ref={pickrRef}>

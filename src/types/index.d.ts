@@ -1,4 +1,6 @@
-type DDMMYY = `${string}/${string}/${number}`;
+type DDMMYY = `${string}/${string}/${number}` | `${number}/${string}/${string}`;
+
+type DateFormat = "ddmmyy" | "mmddyy" | "yymmdd";
 
 type Day =
   | "Monday"
