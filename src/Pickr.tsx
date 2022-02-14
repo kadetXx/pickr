@@ -166,6 +166,10 @@ export const Pickr: React.VFC<PickrProps> = ({
                   setSelectedDay(option.day),
                   setActivePreset(option.presetTitle),
                 ]}
+                onFocus={() => [
+                  setSelectedDay(option.day),
+                  setActivePreset(option.presetTitle),
+                ]}
               />
             ))}
           </PickrPresets>
