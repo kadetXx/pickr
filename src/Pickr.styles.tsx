@@ -17,6 +17,7 @@ export const PickrContainer = styled.div`
   --col-grey: #706f6c;
   --col-teal: #0e9888;
 
+  cursor: pointer;
   width: fit-content;
   position: relative;
   font-family: "SF Pro Display", sans-serif;

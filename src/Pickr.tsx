@@ -94,12 +94,9 @@ export const Pickr: React.VFC<PickrProps> = ({
   // close dropdown on blur
   useEffect(() => {
     // exit if close on blur is false
-    if (!!closeOnBlur === false) return;
+    if (!closeOnBlur || !showCalendar) return;
 
     const handleClick = (e: MouseEvent) => {
-      // exit if calendar is currently not shown
-      if (showCalendar === false) return;
-
       // get classname of main pickr parent container
       const parentClassname = pickrRef.current?.className;
       // get clicked element
