@@ -7,13 +7,16 @@ export default {
   title: "Pickr",
   component: Pickr,
   argTypes: {
+    // todo - figure out why types are not automatically applied here
     format: {
+      defaultValue: "ddmmyy",
       options: ["ddmmyy", "mmddyy", "yymmdd"],
       control: {
         type: "select",
       },
     },
     separator: {
+      defaultValue: "/",
       options: ["/", "-", "."],
       control: {
         type: "select",

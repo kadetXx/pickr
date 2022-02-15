@@ -42,10 +42,9 @@ export interface PickrProps extends HTMLAttributes<HTMLDivElement> {
 export const Pickr: React.VFC<PickrProps> = ({
   format = "ddmmyy",
   separator = "/",
-  openByDefault,
+  openByDefault = false,
   disabled = false,
   closeOnBlur = false,
-  onSelect,
   onDateChange,
   ...props
 }) => {
