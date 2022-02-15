@@ -26,7 +26,7 @@ export const PickrSections = styled.div`
   display: grid;
   min-height: ${ptr(297)};
   box-sizing: border-box;
-  grid-template-columns: ${`${ptr(183)} ${ptr(275)}`};
+  grid-template-columns: ${`${ptr(183)} auto`};
 `;
 
 export const PickrPresetList = styled.ul`
