@@ -49,8 +49,10 @@ export const Pickr: React.VFC<PickrProps> = ({
 }) => {
   const pickrRef = useRef<HTMLDivElement>(null);
   const [showCalendar, setShowCalendar] = useState<boolean>(false);
-  const { selectedDay, setSelectedDay, calendarDays, switcher } = useCalendar(showCalendar);
-  const { presets, activePreset, setActivePreset, updateActivePreset } = usePresets(selectedDay);
+  const { selectedDay, setSelectedDay, calendarDays, monthSwitcher } =
+    useCalendar(showCalendar);
+  const { presets, activePreset, setActivePreset, updateActivePreset } =
+    usePresets(selectedDay);
 
   const getButtonText = () => {
     if (!selectedDay) {
@@ -116,7 +118,7 @@ export const Pickr: React.VFC<PickrProps> = ({
     onDateChange(selectedDay?.dateString!!, formatted);
 
     // update the active preset
-    updateActivePreset(selectedDay)
+    updateActivePreset(selectedDay);
   }, [selectedDay]);
 
   return (
@@ -159,7 +161,7 @@ export const Pickr: React.VFC<PickrProps> = ({
               month={months[selectedDay?.month || 0]}
               year={selectedDay?.year as number}
               action={(direction) => {
-                switcher(direction);
+                monthSwitcher(direction);
               }}
             />
             <CalendarBody>
