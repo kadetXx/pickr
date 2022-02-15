@@ -1,7 +1,7 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { Pickr, PickrProps } from "../Pickr";
+import { Pickr } from "../Pickr";
 
 export default {
   title: "Pickr",
