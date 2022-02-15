@@ -24,23 +24,32 @@ export const usePresets = (selectedDay: DayData | undefined) => {
   const [activePreset, setActivePreset] = useState<PresetTitle>("Today");
 
   const updateActivePreset = (day: DayData) => {
-    // grab timestamps of all presets
-    const definitePresets = presets?.map((item) => item.day.timeStamp);
+    if (!presets) return;
 
-    // check if timestamp of currently selected matches any of the presets
-    const isADefinitePreset = definitePresets?.includes(day?.timeStamp);
+    // grab timestamps of all presets
+    const timestamps = presets?.map((item) => item.day.timeStamp);
+    // check if timestamp of current day is in preset list
+    const isPreset = timestamps?.includes(day?.timeStamp);
 
     // if there's a match
-    if (isADefinitePreset) {
-      // grab the item that matched from preset lists
-      const active = presets?.find(
+    if (isPreset) {
+      // grab the items that matched from preset lists
+      const matches = presets?.filter(
         (item) => item.day.timeStamp === day.timeStamp
       );
 
-      // set active preset to the matched item
-      !!active && setActivePreset(active.presetTitle);
-    } else {
-      // othewise, if there's no match, set active preset to custom
+      // get titles of matches
+      const titles = matches?.map((item) => item.presetTitle);
+
+      // check if any of the current matches have previously been selected
+      const isAlreadySelected = titles?.includes(activePreset);
+
+      // set active preset to the matched item if it hasn't been selected
+      !!matches &&
+        !isAlreadySelected &&
+        setActivePreset(matches[0].presetTitle);
+    } else if (typeof isPreset !== undefined) {
+      // othewise, if selected day isn't a preset, set active preset to custom
       setActivePreset("Custom");
     }
   };

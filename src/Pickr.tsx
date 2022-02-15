@@ -52,17 +52,6 @@ export const Pickr: React.VFC<PickrProps> = ({
   const { selectedDay, setSelectedDay, calendarDays, switcher } = useCalendar();
   const { presets, activePreset, setActivePreset, updateActivePreset } = usePresets(selectedDay);
 
-  // update selected date when calendar item is clicked
-  // and also change active preset to custom if selected date is not among presets
-  const handleCalenderDayClick = (day: DayData) => {
-    // return if presets is absent or the clicked day is already selected
-    if (!presets || day.timeStamp === selectedDay?.timeStamp) return;
-
-    // update state
-    setSelectedDay(day);
-    updateActivePreset(day);
-  };
-
   const getButtonText = () => {
     if (!selectedDay) {
       return "Today";
@@ -120,7 +109,11 @@ export const Pickr: React.VFC<PickrProps> = ({
     const { dayOfMonth, month, year } = selectedDay;
     const formatted = formatDate(dayOfMonth!!, month!!, year!!, format);
 
+    // return datestring and date
     onDateChange(selectedDay?.dateString!!, formatted);
+
+    // update the active preset
+    updateActivePreset(selectedDay)
   }, [selectedDay]);
 
   return (
@@ -187,7 +180,7 @@ export const Pickr: React.VFC<PickrProps> = ({
                   role="button"
                   title={getTitle(day)}
                   date={day.dayOfMonth as number}
-                  onClick={() => handleCalenderDayClick(day)}
+                  onClick={() => setSelectedDay(day)}
                 />
               ))}
             </CalendarBody>
