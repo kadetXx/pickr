@@ -42,8 +42,6 @@ const findDay = (
     // return the day
     return day;
   }
-
-  // return calendarOfIndex[index];
 };
 
 export const navigateCalendar = (
