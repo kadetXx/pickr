@@ -49,7 +49,7 @@ export const Pickr: React.VFC<PickrProps> = ({
 }) => {
   const pickrRef = useRef<HTMLDivElement>(null);
   const [showCalendar, setShowCalendar] = useState<boolean>(false);
-  const { selectedDay, setSelectedDay, calendarDays, switcher } = useCalendar();
+  const { selectedDay, setSelectedDay, calendarDays, switcher } = useCalendar(showCalendar);
   const { presets, activePreset, setActivePreset, updateActivePreset } = usePresets(selectedDay);
 
   const getButtonText = () => {
@@ -98,7 +98,10 @@ export const Pickr: React.VFC<PickrProps> = ({
       !isDescendant && setShowCalendar(false);
     };
 
+    // rlisten for click events in window
     window.addEventListener("click", handleClick);
+
+    // remove click listener on cleanup
     return () => window.removeEventListener("click", handleClick);
   }, [showCalendar, closeOnBlur]);
 

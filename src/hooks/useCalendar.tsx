@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 
-import { getMonthData } from "../utils";
+import { getMonthData, getIndexOfDay } from "../utils";
 
 interface CalendarState {
   month: number;
   year: number;
 }
 
-export const useCalendar = () => {
+export const useCalendar = (visible: boolean) => {
   const [selectedDay, setSelectedDay] = useState<DayData>();
   const [calendarDays, setCalendarDays] = useState<DayData[]>();
   const [calendarState, setCalendarState] = useState<CalendarState>();
@@ -102,6 +102,48 @@ export const useCalendar = () => {
       setCalendarDays(calendar);
     }
   }, [selectedDay]);
+
+  useEffect(() => {
+    const switchDay = (e: KeyboardEvent) => {
+      // exit of calendar is not currently visible
+      if (!visible || !selectedDay || !calendarDays) return;
+
+      // get key name
+      const key = e.key.toLowerCase();
+      const indexOfCurrent = getIndexOfDay(selectedDay, calendarDays);
+
+      // get next, prev, top and bottom
+      const nextDay = calendarDays[indexOfCurrent + 1];
+      const prevDay = calendarDays[indexOfCurrent - 1];
+      const topDay = calendarDays[indexOfCurrent - 7];
+      const bottomDay = calendarDays[indexOfCurrent + 7];
+
+      switch (key) {
+        case "arrowright":
+          setSelectedDay(nextDay);
+          break;
+        case "arrowleft":
+          setSelectedDay(prevDay);
+          break;
+        case "arrowup":
+          setSelectedDay(topDay);
+          break;
+        case "arrowdown":
+          setSelectedDay(bottomDay);
+          break;
+        default:
+          break;
+      }
+    };
+
+    // add a key listener
+    document.addEventListener("keydown", switchDay);
+
+    // remove listener on cleanup
+    return () => {
+      document.removeEventListener("keydown", switchDay);
+    };
+  }, [visible, selectedDay, calendarDays]);
 
   return {
     selectedDay,
