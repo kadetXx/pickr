@@ -22,10 +22,7 @@ const findDay = (
     const { calendar } = getMonthData(month, year);
 
     const prevMonthDay = calendar[calendar.length + index - 7];
-    const nextMonthDay = calendar.find(
-      (item) =>
-        item.month === month && item.dayOfMonth === index - calendar.length + 7
-    );
+    const nextMonthDay = calendar[calendar.length - index + 7];
 
     // grab the day of seeked index
     const day = belongsToPrev ? prevMonthDay : nextMonthDay;
