@@ -50,7 +50,7 @@ export const Pickr: React.VFC<PickrProps> = ({
   const pickrRef = useRef<HTMLDivElement>(null);
   const [showCalendar, setShowCalendar] = useState<boolean>(false);
   const { selectedDay, setSelectedDay, calendarDays, switcher } = useCalendar();
-  const { presets, activePreset, setActivePreset } = usePresets(selectedDay);
+  const { presets, activePreset, setActivePreset, updateActivePreset } = usePresets(selectedDay);
 
   // update selected date when calendar item is clicked
   // and also change active preset to custom if selected date is not among presets
@@ -60,26 +60,7 @@ export const Pickr: React.VFC<PickrProps> = ({
 
     // update state
     setSelectedDay(day);
-
-    // grab timestamps of all presets
-    const definitePresets = presets.map((item) => item.day.timeStamp);
-
-    // check if timestamp of currently selected matches any of the presets
-    const isADefinitePreset = definitePresets?.includes(day?.timeStamp);
-
-    // if there's a match
-    if (isADefinitePreset) {
-      // grab the item that matched from preset lists
-      const active = presets.find(
-        (item) => item.day.timeStamp === day.timeStamp
-      );
-
-      // set active preset to the matched item
-      !!active && setActivePreset(active.presetTitle);
-    } else {
-      // othewise, if there's no match, set active preset to custom
-      setActivePreset("Custom");
-    }
+    updateActivePreset(day);
   };
 
   const getButtonText = () => {
@@ -180,7 +161,9 @@ export const Pickr: React.VFC<PickrProps> = ({
             <CalendarHead
               month={months[selectedDay?.month || 0]}
               year={selectedDay?.year as number}
-              action={switcher}
+              action={(direction) => {
+                switcher(direction);
+              }}
             />
             <CalendarBody>
               {weekDays.map((item, index) => (

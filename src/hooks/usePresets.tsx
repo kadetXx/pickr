@@ -23,6 +23,28 @@ export const usePresets = (selectedDay: DayData | undefined) => {
   const [presets, setPresets] = useState<Preset[]>();
   const [activePreset, setActivePreset] = useState<PresetTitle>("Today");
 
+  const updateActivePreset = (day: DayData) => {
+    // grab timestamps of all presets
+    const definitePresets = presets?.map((item) => item.day.timeStamp);
+
+    // check if timestamp of currently selected matches any of the presets
+    const isADefinitePreset = definitePresets?.includes(day?.timeStamp);
+
+    // if there's a match
+    if (isADefinitePreset) {
+      // grab the item that matched from preset lists
+      const active = presets?.find(
+        (item) => item.day.timeStamp === day.timeStamp
+      );
+
+      // set active preset to the matched item
+      !!active && setActivePreset(active.presetTitle);
+    } else {
+      // othewise, if there's no match, set active preset to custom
+      setActivePreset("Custom");
+    }
+  };
+
   useEffect(() => {
     let today;
     let yesterday;
@@ -100,5 +122,5 @@ export const usePresets = (selectedDay: DayData | undefined) => {
     ]);
   }, [selectedDay]);
 
-  return { presets, activePreset, setActivePreset };
+  return { presets, activePreset, setActivePreset, updateActivePreset };
 };
