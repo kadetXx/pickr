@@ -159,10 +159,9 @@ export const Pickr: React.VFC<PickrProps> = ({
         <PickrSections>
           <PickrPresetList>
             {presets?.map((option, index) => (
-              <PickrPresetListItem>
+              <PickrPresetListItem key={index}>
                 <PresetItem
                   {...option}
-                  key={index}
                   title={getTitle(option.day)}
                   active={activePreset === option.presetTitle}
                   onClick={() => [
