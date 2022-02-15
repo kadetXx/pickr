@@ -12,25 +12,25 @@ export const useCalendar = (visible: boolean) => {
   const [calendarDays, setCalendarDays] = useState<DayData[]>();
   const [calendarState, setCalendarState] = useState<CalendarState>();
 
-  const monthSwitcher = (direction: "prev" | "next"): void => {
-    if (!calendarState) return;
-
-    const { month, year } = calendarState;
-
+  const monthSwitcher = (
+    month: number,
+    year: number,
+    direction: "prev" | "next"
+  ): void => {
     let newmonth;
     let newyear;
 
     if (direction === "next") {
-      newmonth = month === 11 ? 0 : month + 1;
-      newyear = month === 11 ? year + 1 : year;
+      newmonth = month === 11 ? 0 : month!! + 1;
+      newyear = month === 11 ? year!! + 1 : year;
     } else {
-      newmonth = month === 0 ? 11 : month - 1;
-      newyear = month === 0 ? year - 1 : year;
+      newmonth = month === 0 ? 11 : month!! - 1;
+      newyear = month === 0 ? year!! - 1 : year;
     }
 
     setCalendarState({
       month: newmonth,
-      year: newyear,
+      year: newyear!!,
     });
   };
 

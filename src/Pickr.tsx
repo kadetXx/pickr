@@ -69,6 +69,8 @@ export const Pickr: React.VFC<PickrProps> = ({
     return `${months[day.month as number]} ${day.dayOfMonth}, ${day.year}`;
   };
 
+  const handleMonthSwitch = () => {};
+
   // set default state to open if open by default is true
   useLayoutEffect(() => {
     openByDefault && setShowCalendar(true);
@@ -161,7 +163,12 @@ export const Pickr: React.VFC<PickrProps> = ({
               month={months[selectedDay?.month || 0]}
               year={selectedDay?.year as number}
               action={(direction) => {
-                monthSwitcher(direction);
+                if (!selectedDay) return;
+                monthSwitcher(
+                  selectedDay.month!!,
+                  selectedDay.year!!,
+                  direction
+                );
               }}
             />
             <CalendarBody>
