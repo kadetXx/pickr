@@ -43,8 +43,8 @@ export const Pickr: React.VFC<PickrProps> = ({
   format = "ddmmyy",
   separator = "/",
   openByDefault,
-  disabled,
-  closeOnBlur,
+  disabled = false,
+  closeOnBlur = false,
   onSelect,
   onDateChange,
   ...props
