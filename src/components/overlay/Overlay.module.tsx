@@ -14,7 +14,6 @@ export const StyledOverlay = styled.div<Pick<OverlayProps, "visible">>`
   border-radius: 12px;
   min-width: 100%;
   min-height: 7rem;
-  max-height: ${ptr(458)};
   box-shadow: 0px 1px 1px rgba(20, 20, 0, 0.051);
   transition: opacity 0.25s 0.1s, transform 0.25s 0.1s, box-shadow 0.2ms 0.1ms;
   background-color: var(--col-white);

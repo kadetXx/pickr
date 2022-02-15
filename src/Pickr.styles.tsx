@@ -27,6 +27,10 @@ export const PickrSections = styled.div`
   min-height: ${ptr(297)};
   box-sizing: border-box;
   grid-template-columns: ${`${ptr(183)} auto`};
+
+  @media screen and (max-width: 500px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 export const PickrPresetList = styled.ul`
@@ -43,7 +47,14 @@ export const PickrPresetList = styled.ul`
   border: 0;
   list-style: none;
   background-color: var(--col-grey-500);
-  padding: ${`${ptr(24)} ${ptr(17)} ${ptr(24)} ${ptr(25)}`};
+  padding: ${ptr(24)} ${ptr(17)} ${ptr(24)} ${ptr(25)};
+
+  @media screen and (max-width: 500px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.3rem;
+    padding: ${ptr(17)};
+  }
 `;
 
 export const PickrPresetListItem = styled.li`
@@ -51,7 +62,7 @@ export const PickrPresetListItem = styled.li`
   margin: 0;
   width: 100%;
   height: fit-content;
-`
+`;
 
 export const PickrCalendar = styled.div`
   width: 100%;
@@ -60,7 +71,7 @@ export const PickrCalendar = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: ${ptr(25)};
-  padding: ${`${ptr(24)} ${ptr(24)} ${ptr(24)} ${ptr(12)}`};
+  padding: ${ptr(24)} ${ptr(24)} ${ptr(24)} ${ptr(12)};
 `;
 
 export const CalendarBody = styled.div`
