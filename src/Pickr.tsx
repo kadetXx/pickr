@@ -35,6 +35,7 @@ export interface PickrProps extends HTMLAttributes<HTMLDivElement> {
   openByDefault?: boolean;
   closeOnBlur?: boolean;
   format?: DateFormat;
+  separator?: Separators;
   onDateChange: (dateString: Date, date: DDMMYY) => void;
 }
 
@@ -45,6 +46,7 @@ export const Pickr: React.VFC<PickrProps> = ({
   onSelect,
   onDateChange,
   format = "ddmmyy",
+  separator = "/",
   ...props
 }) => {
   const pickrRef = useRef<HTMLDivElement>(null);
@@ -60,7 +62,7 @@ export const Pickr: React.VFC<PickrProps> = ({
     }
 
     const { dayOfMonth, month, year } = selectedDay;
-    const formatted = formatDate(dayOfMonth!!, month!!, year!!, format);
+    const formatted = formatDate(dayOfMonth!!, month!!, year!!, format, separator);
 
     return activePreset === "Custom" ? formatted : activePreset;
   };
@@ -114,7 +116,7 @@ export const Pickr: React.VFC<PickrProps> = ({
     if (!selectedDay) return;
 
     const { dayOfMonth, month, year } = selectedDay;
-    const formatted = formatDate(dayOfMonth!!, month!!, year!!, format);
+    const formatted = formatDate(dayOfMonth!!, month!!, year!!, format, separator);
 
     // return datestring and date
     onDateChange(selectedDay?.dateString!!, formatted);
