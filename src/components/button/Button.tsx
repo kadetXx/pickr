@@ -21,7 +21,7 @@ export const Button: React.VFC<ButtonProps> = ({
       </Text>
 
       {icon && (
-        <Icon src={icon} width={10} height={10} rotation={iconRotation} />
+        <Icon alt="plus icon" src={icon} width={10} height={10} rotation={iconRotation} />
       )}
     </StyledButton>
   );

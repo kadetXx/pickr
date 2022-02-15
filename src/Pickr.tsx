@@ -143,10 +143,9 @@ export const Pickr: React.VFC<PickrProps> = ({
         text={getButtonText()}
         disabled={disabled}
         aria-disabled={disabled}
-        aria-label="Datepicker"
+        aria-label="Date Picker"
         icon={PlusIcon}
         iconRotation={showCalendar ? 45 : 0}
-        title="Datepicker"
         onClick={() => setShowCalendar(!showCalendar)}
         onFocus={() => setShowCalendar(true)}
       />
