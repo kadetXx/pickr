@@ -18,8 +18,13 @@ const findDay = (
     // get the calendarDays of previous group
     const { calendar, numberOfDays } = getMonthData(month, year);
 
+    // day of the month on previous group to move to
+    const dateToMoveTo = index + numberOfDays;
+
     // grab the day of seeked index
-    const day = calendar[index + numberOfDays];
+    const day = calendar.find(
+      (item) => item.month === month && item.dayOfMonth === dateToMoveTo
+    );
 
     // return the day
     return day;
@@ -36,8 +41,13 @@ const findDay = (
     // get the calendarDays of next group
     const { calendar, numberOfDays } = getMonthData(month, year);
 
+    // day of the next on previous group to move to
+    const dateToMoveTo = index - numberOfDays;
+
     // grab the day of seeked index
-    const day = calendar[index - numberOfDays];
+    const day = calendar.find(
+      (item) => item.month === month && item.dayOfMonth === dateToMoveTo
+    );
 
     // grab the day of seeked index
     return day;
