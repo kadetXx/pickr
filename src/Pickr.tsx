@@ -205,7 +205,8 @@ export const Pickr: React.VFC<PickrProps> = ({
                       ? "selectable"
                       : "dormant"
                   }
-                  role="cell"
+                  role="gridcell"
+                  aria-selected={day.timeStamp === selectedDay?.timeStamp}
                   title={getTitle(day)}
                   aria-label={getTitle(day)}
                   date={day.dayOfMonth as number}
