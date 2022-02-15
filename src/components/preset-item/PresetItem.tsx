@@ -31,7 +31,7 @@ export const PresetItem: React.VFC<PresetItemProps> = ({
         width={13.13}
         height={15}
         src={active ? iconAlt : icon}
-        alt={presetTitle}
+        alt={'Calendar Icon'}
       />
       <Text
         size={13}
