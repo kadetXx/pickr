@@ -24,7 +24,7 @@ const findDay = (
     // day of the month on previous or next group to move to
     const dateToMoveTo = belongsToPrev
       ? index + numberOfDays
-      : index - numberOfDays;
+      : index - calendar.length + 7;
 
     // grab the day of seeked index
     const day = calendar.find(
