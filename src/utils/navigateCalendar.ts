@@ -19,17 +19,16 @@ const findDay = (
     });
 
     // get the calendarDays of previou or next group
-    const { calendar, numberOfDays } = getMonthData(month, year);
+    const { calendar } = getMonthData(month, year);
 
-    // day of the month on previous or next group to move to
-    const dateToMoveTo = belongsToPrev
-      ? index + numberOfDays
-      : index - calendar.length + 7;
+    const prevMonthDay = calendar[calendar.length + index - 7];
+    const nextMonthDay = calendar.find(
+      (item) =>
+        item.month === month && item.dayOfMonth === index - calendar.length + 7
+    );
 
     // grab the day of seeked index
-    const day = calendar.find(
-      (item) => item.month === month && item.dayOfMonth === dateToMoveTo
-    );
+    const day = belongsToPrev ? prevMonthDay : nextMonthDay;
 
     // return the day
     return day;
