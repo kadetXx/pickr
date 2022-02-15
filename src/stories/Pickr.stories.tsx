@@ -10,13 +10,13 @@ export default {
     format: {
       options: ["ddmmyy", "mmddyy", "yymmdd"],
       control: {
-        type: "radio",
+        type: "select",
       },
     },
     separator: {
       options: ["/", "-", "."],
       control: {
-        type: "radio",
+        type: "select",
       },
     },
   },
