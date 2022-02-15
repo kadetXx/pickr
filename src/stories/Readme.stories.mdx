@@ -3,79 +3,8 @@ import { Meta } from "@storybook/addon-docs";
 <Meta title="Readme" />
 
 <style>{`
-  .subheading {
-    --mediumdark: '#999999';
-    font-weight: 900;
-    font-size: 13px;
-    color: #999;
-    letter-spacing: 6px;
-    line-height: 24px;
-    text-transform: uppercase;
-    margin-bottom: 12px;
-    margin-top: 40px;
-  }
-
-  .link-list {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
-    row-gap: 10px;
-  }
-
-  @media (min-width: 620px) {
-    .link-list {
-      row-gap: 20px;
-      column-gap: 20px;
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-
-  @media all and (-ms-high-contrast:none) {
-  .link-list {
-      display: -ms-grid;
-      -ms-grid-columns: 1fr 1fr;
-      -ms-grid-rows: 1fr 1fr;
-    }
-  }
-
-  .link-item {
-    display: block;
-    padding: 20px 30px 20px 15px;
-    border: 1px solid #00000010;
-    border-radius: 5px;
-    transition: background 150ms ease-out, border 150ms ease-out, transform 150ms ease-out;
-    color: #333333;
-    display: flex;
-    align-items: flex-start;
-  }
-
-  .link-item:hover {
-    border-color: #1EA7FD50;
-    transform: translate3d(0, -3px, 0);
-    box-shadow: rgba(0, 0, 0, 0.08) 0 3px 10px 0;
-  }
-
-  .link-item:active {
-    border-color: #1EA7FD;
-    transform: translate3d(0, 0, 0);
-  }
-
-  .link-item strong {
-    font-weight: 700;
-    display: block;
-    margin-bottom: 2px;
-  }
-  
-  .link-item img {
-    height: 40px;
-    width: 40px;
-    margin-right: 15px;
-    flex: none;
-  }
-
-  .link-item span {
-    font-size: 14px;
-    line-height: 20px;
+  .link {
+    color: #0e9888;
   }
 
   .tip {
@@ -102,19 +31,60 @@ import { Meta } from "@storybook/addon-docs";
     font-size: 12px;
     display: inline-block;
   }
-
-  
 `}</style>
 
 # Pickr - Float Frontend Test
 
-Pickr is a datepicker component with preset dates to select from. 
+Submission for FloatHQ Frontend test. Pickr is a datepicker component with a calendar and also preset dates to select from.
 
-Browse example stories now by navigating to them in the sidebar.
-View their code in the `src/stories` directory to learn how they work.
-We recommend building UIs with a [**component-driven**](https://componentdriven.org) process starting with atomic components and ending with pages.
+### ⚡️ Features
+
+- Preset Dates
+- Variable date formats
+- Custom separators
+- Keyboard navigation
+- Zero third party date libraries
+- Typescript Ready
+
+Browse pickr samples now by navigating to them in the sidebar. Also check the `Docs` section (top left) for all props and code samples.
+
+### 🔗 Links
+
+<a className="link" href="https://www.figma.com/file/cyWeYT0rguU6FDp9eGCrqH/Float-Test?node-id=0%3A1">
+  - Code (Github)
+</a>
 
 <div className="tip-wrapper">
   <span className="tip">Tip</span>Edit the Markdown in{" "}
   <code>src/stories/Introduction.stories.mdx</code>
 </div>
+
+### 🛠 Tools & libraries Used.
+
+Here is a list of the libraries contained in the package.json and the reasons why I installed each of them.
+
+#### React JS
+
+- I used react JS so I'lld be able to seamlessly craft the UI for the datepicker.
+- React helped me create **_reusable components_**.
+
+#### Typescript
+
+- Typescript provides static typing (duck typing actually) superpowers to my javascript.
+- The test is testing for my ability to utilize typescript so using typescript was important.
+
+#### StoryBook
+
+I had to make use of storybook because:
+
+- I needed to build Pickr in isolation as an independed component.
+- I was required to provide this **_documentation_** with it.
+
+#### Emotion
+
+I picked Emotion as my choice for styling for the following reasons:
+
+- Emotion integrates seamlessly with StoryBook.
+- Emotion provides access to component props when writing styles.
+- Emotion lets me use conditionals and javascript functions in my stylesheet. One that I particularly like is a function I wrote to convert px units to rem. Rem units is a neccessity when I am building responsive components and this function saved me all the time I would have used to manually divide px values from figma by 16.
+- And lastly, [FloatHQ](https://float.co) already uses emotion on the web app so I thought it'll be an impressive choice.
