@@ -5,7 +5,6 @@ import { ButtonProps } from "..";
 export const StyledButton = styled.button<Pick<ButtonProps, 'disabled'>>`
   cursor: pointer;
   position: relative;
-  width: fit-content;
   border: 1px solid black;
   font-family: inherit;
   display: flex;

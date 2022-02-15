@@ -13,7 +13,6 @@ export const StyledOverlay = styled.div<Pick<OverlayProps, "visible">>`
   overflow: hidden;
   border-radius: 12px;
   min-width: 100%;
-  max-width: ${ptr(458)};
   min-height: 7rem;
   max-height: ${ptr(458)};
   box-shadow: 0px 1px 1px rgba(20, 20, 0, 0.051);
