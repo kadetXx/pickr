@@ -137,6 +137,7 @@ export const Pickr: React.VFC<PickrProps> = ({
                 <PresetItem
                   {...option}
                   title={getTitle(option.day)}
+                  aria-label={option.presetTitle}
                   active={activePreset === option.presetTitle}
                   onClick={() => [
                     setSelectedDay(option.day),
@@ -179,6 +180,7 @@ export const Pickr: React.VFC<PickrProps> = ({
                   }
                   role="button"
                   title={getTitle(day)}
+                  aria-label={getTitle(day)}
                   date={day.dayOfMonth as number}
                   onClick={() => setSelectedDay(day)}
                 />
