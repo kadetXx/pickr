@@ -22,6 +22,11 @@ OpenByDefault.args = {
   openByDefault: true,
 };
 
+export const CustomToggle = Template.bind({});
+CustomToggle.args = {
+  toggleCalendar: false,
+};
+
 export const Disabled = Template.bind({});
 Disabled.args = {
   disabled: true,

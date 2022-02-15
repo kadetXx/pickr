@@ -77,8 +77,6 @@ export const Pickr: React.VFC<PickrProps> = ({
     return `${months[day.month as number]} ${day.dayOfMonth}, ${day.year}`;
   };
 
-  const handleMonthSwitch = () => {};
-
   // set default state to open if open by default is true
   useLayoutEffect(() => {
     openByDefault && setShowCalendar(true);
@@ -86,7 +84,11 @@ export const Pickr: React.VFC<PickrProps> = ({
 
   // set showcalendar based on custom toggle prop
   useEffect(() => {
-    "toggle" in props && setShowCalendar(!!props.toggleCalendar);
+    // check if customtoggle was provided
+    if (props.toggleCalendar === undefined) return;
+
+    // update calendar visibility based on toggle
+    setShowCalendar(props.toggleCalendar);
   }, [props.toggleCalendar]);
 
   // close dropdown on blur
