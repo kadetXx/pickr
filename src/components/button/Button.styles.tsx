@@ -23,6 +23,6 @@ export const StyledButton = styled.button<Pick<ButtonProps, 'disabled'>>`
   background-color: ${props => props.disabled ? 'var(--col-grey-300)' : 'var(--col-white)'};
 
   &:focus {
-    outline: 1px solid var(--col-teal);
+    outline: none;
   }
 `;

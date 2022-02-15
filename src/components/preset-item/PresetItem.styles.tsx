@@ -4,6 +4,7 @@ import { PresetItemProps } from "./PresetItem";
 
 export const StyledPreset = styled.button<Pick<PresetItemProps, "active">>`
   cursor: pointer;
+  width: 100%;
   padding: ${`0 0 0 ${ptr(8)}`};
   display: flex;
   flex-flow: row nowrap;

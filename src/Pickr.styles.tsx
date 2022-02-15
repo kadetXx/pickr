@@ -29,7 +29,7 @@ export const PickrSections = styled.div`
   grid-template-columns: ${`${ptr(183)} ${ptr(275)}`};
 `;
 
-export const PickrPresets = styled.div`
+export const PickrPresetList = styled.ul`
   width: 100%;
   min-height: 100%;
   box-sizing: border-box;
@@ -38,9 +38,20 @@ export const PickrPresets = styled.div`
   justify-content: flex-start;
   align-items: stretch;
   row-gap: ${ptr(3)};
+  padding: 0;
+  margin: 0;
+  border: 0;
+  list-style: none;
   background-color: var(--col-grey-500);
   padding: ${`${ptr(24)} ${ptr(17)} ${ptr(24)} ${ptr(25)}`};
 `;
+
+export const PickrPresetListItem = styled.li`
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: fit-content;
+`
 
 export const PickrCalendar = styled.div`
   width: 100%;

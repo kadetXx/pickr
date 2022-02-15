@@ -9,7 +9,8 @@ import React, {
 import {
   PickrContainer,
   PickrSections,
-  PickrPresets,
+  PickrPresetList,
+  PickrPresetListItem,
   PickrCalendar,
   CalendarBody,
 } from "./Pickr.styles";
@@ -156,24 +157,27 @@ export const Pickr: React.VFC<PickrProps> = ({
       />
       <Overlay visible={showCalendar}>
         <PickrSections>
-          <PickrPresets>
+          <PickrPresetList>
             {presets?.map((option, index) => (
-              <PresetItem
-                {...option}
-                key={index}
-                title={getTitle(option.day)}
-                active={activePreset === option.presetTitle}
-                onClick={() => [
-                  setSelectedDay(option.day),
-                  setActivePreset(option.presetTitle),
-                ]}
-                onFocus={() => [
-                  setSelectedDay(option.day),
-                  setActivePreset(option.presetTitle),
-                ]}
-              />
+              <PickrPresetListItem>
+                <PresetItem
+                  {...option}
+                  key={index}
+                  tabIndex={-1}
+                  title={getTitle(option.day)}
+                  active={activePreset === option.presetTitle}
+                  onClick={() => [
+                    setSelectedDay(option.day),
+                    setActivePreset(option.presetTitle),
+                  ]}
+                  onFocus={() => [
+                    setSelectedDay(option.day),
+                    setActivePreset(option.presetTitle),
+                  ]}
+                />
+              </PickrPresetListItem>
             ))}
-          </PickrPresets>
+          </PickrPresetList>
           <PickrCalendar>
             <CalendarHead
               month={months[selectedDay?.month || 0]}
