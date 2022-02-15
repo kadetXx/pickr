@@ -2,9 +2,10 @@ export const formatDate = (
   day: number,
   month: number,
   year: number,
-  format: DateFormat,
-  separator: Separators
+  format: "ddmmyy" | "mmddyy" | "yymmdd" | undefined,
+  separator: "/" | "-" | "." | string | undefined
 ): DDMMYY => {
+  const dateSeparator = separator || "/";
   // extend number object to include padding function
   const pad = (value: number) => {
     const padded = ("0" + value).slice(-2);
@@ -15,10 +16,10 @@ export const formatDate = (
   const paddedMonth = pad(month + 1);
 
   const allFormats = {
-    ddmmyy: `${paddedDay}${separator}${paddedMonth}${separator}${year}`,
-    mmddyy: `${paddedMonth}${separator}${paddedDay}${separator}${year}`,
-    yymmdd: `${year}${separator}${paddedMonth}${separator}${paddedDay}`,
+    ddmmyy: `${paddedDay}${dateSeparator}${paddedMonth}${dateSeparator}${year}`,
+    mmddyy: `${paddedMonth}${dateSeparator}${paddedDay}${dateSeparator}${year}`,
+    yymmdd: `${year}${dateSeparator}${paddedMonth}${dateSeparator}${paddedDay}`,
   };
 
-  return allFormats[format] as DDMMYY;
+  return allFormats[format || "ddmmyy"] as DDMMYY;
 };

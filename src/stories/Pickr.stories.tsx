@@ -10,18 +10,19 @@ export default {
     // todo - figure out why types are not automatically applied here
     format: {
       defaultValue: "ddmmyy",
-      options: ["ddmmyy", "mmddyy", "yymmdd"],
       control: {
-        type: "select",
+        type: "inline-radio",
       },
     },
     separator: {
       defaultValue: "/",
-      options: ["/", "-", "."],
       control: {
-        type: "select",
+        type: "inline-radio",
       },
     },
+    closeOnBlur: { defaultValue: false },
+    disabled: { defaultValue: false },
+    openByDefault: { defaultValue: false },
   },
 } as ComponentMeta<typeof Pickr>;
 

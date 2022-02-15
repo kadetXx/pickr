@@ -34,18 +34,19 @@ export interface PickrProps extends HTMLAttributes<HTMLDivElement> {
   toggleCalendar?: boolean;
   openByDefault?: boolean;
   closeOnBlur?: boolean;
-  format?: DateFormat;
-  separator?: Separators;
+  format?: "ddmmyy" | "mmddyy" | "yymmdd";
+  separator?: "/" | "-" | "." | string;
   onDateChange: (dateString: Date, date: DDMMYY) => void;
 }
 
 export const Pickr: React.VFC<PickrProps> = ({
-  format = "ddmmyy",
-  separator = "/",
+  format,
+  separator,
   openByDefault = false,
   disabled = false,
   closeOnBlur = false,
   onDateChange,
+  toggleCalendar,
   ...props
 }) => {
   const pickrRef = useRef<HTMLDivElement>(null);
@@ -84,11 +85,11 @@ export const Pickr: React.VFC<PickrProps> = ({
   // set showcalendar based on custom toggle prop
   useEffect(() => {
     // check if customtoggle was provided
-    if (props.toggleCalendar === undefined) return;
+    if (toggleCalendar === undefined) return;
 
     // update calendar visibility based on toggle
-    setShowCalendar(props.toggleCalendar);
-  }, [props.toggleCalendar]);
+    setShowCalendar(toggleCalendar);
+  }, [toggleCalendar]);
 
   // close dropdown on blur
   useEffect(() => {
@@ -139,7 +140,7 @@ export const Pickr: React.VFC<PickrProps> = ({
   }, [selectedDay]);
 
   return (
-    <PickrContainer ref={pickrRef}>
+    <PickrContainer {...props} ref={pickrRef}>
       <Button
         text={getButtonText()}
         disabled={disabled}

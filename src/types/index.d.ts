@@ -1,8 +1,5 @@
 type DDMMYY = `${string}/${string}/${number}` | `${number}/${string}/${string}`;
 
-type DateFormat = "ddmmyy" | "mmddyy" | "yymmdd";
-type Separators = "/" | "-" | ".";
-
 type Day =
   | "Monday"
   | "Tuesday"
