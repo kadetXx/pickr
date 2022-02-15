@@ -6,20 +6,25 @@ const findDay = (
   currentCalendar: DayData[],
   currentDay: DayData
 ) => {
-  // if seeked index belongs to previous calendar group
-  if (index < 0) {
-    // get the month and year of previous calendar group
+  const belongsToPrev = index < 0;
+  const belongsToNext = index > currentCalendar.length - 1;
+
+  // if seeked index belongs to previous or next calendar group
+  if (belongsToPrev || belongsToNext) {
+    // get the month and year of previous or next calendar group
     const [month, year] = getMonthAndYear({
       month: currentDay.month!!,
       year: currentDay.year!!,
-      type: "prev",
+      type: belongsToPrev ? "prev" : "next",
     });
 
-    // get the calendarDays of previous group
+    // get the calendarDays of previou or next group
     const { calendar, numberOfDays } = getMonthData(month, year);
 
-    // day of the month on previous group to move to
-    const dateToMoveTo = index + numberOfDays;
+    // day of the month on previous or next group to move to
+    const dateToMoveTo = belongsToPrev
+      ? index + numberOfDays
+      : index - numberOfDays;
 
     // grab the day of seeked index
     const day = calendar.find(
@@ -27,29 +32,6 @@ const findDay = (
     );
 
     // return the day
-    return day;
-
-    // if seeked index belongs to next calendar group
-  } else if (index > currentCalendar.length - 1) {
-    // get the month and year of next calendar group
-    const [month, year] = getMonthAndYear({
-      month: currentDay.month!!,
-      year: currentDay.year!!,
-      type: "next",
-    });
-
-    // get the calendarDays of next group
-    const { calendar, numberOfDays } = getMonthData(month, year);
-
-    // day of the next on previous group to move to
-    const dateToMoveTo = index - numberOfDays;
-
-    // grab the day of seeked index
-    const day = calendar.find(
-      (item) => item.month === month && item.dayOfMonth === dateToMoveTo
-    );
-
-    // grab the day of seeked index
     return day;
 
     // otherwise if seeked index belongs to visible calendar
