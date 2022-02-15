@@ -70,12 +70,12 @@ export const Pickr: React.VFC<PickrProps> = ({
   // set default state to open if open by default is true
   useLayoutEffect(() => {
     openByDefault && setShowCalendar(true);
-  }, [props.toggleCalendar]);
+  }, []);
 
   // set showcalendar based on custom toggle prop
   useEffect(() => {
     "toggle" in props && setShowCalendar(!!props.toggleCalendar);
-  }, []);
+  }, [props.toggleCalendar]);
 
   // close dropdown on blur
   useEffect(() => {
