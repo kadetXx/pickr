@@ -60,7 +60,7 @@ export const PickrCalendar = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: ${ptr(25)};
-  padding: ${`${ptr(24)} ${ptr(37)} ${ptr(34)} ${ptr(12)}`};
+  padding: ${`${ptr(24)} ${ptr(24)} ${ptr(24)} ${ptr(12)}`};
 `;
 
 export const CalendarBody = styled.div`
