@@ -163,7 +163,6 @@ export const Pickr: React.VFC<PickrProps> = ({
                 <PresetItem
                   {...option}
                   key={index}
-                  tabIndex={-1}
                   title={getTitle(option.day)}
                   active={activePreset === option.presetTitle}
                   onClick={() => [
