@@ -173,7 +173,7 @@ export const Pickr: React.VFC<PickrProps> = ({
               </PickrPresetListItem>
             ))}
           </PickrPresetList>
-          <PickrCalendar>
+          <PickrCalendar role="grid">
             <CalendarHead
               month={months[selectedDay?.month || 0]}
               year={selectedDay?.year as number}
@@ -186,7 +186,7 @@ export const Pickr: React.VFC<PickrProps> = ({
                 );
               }}
             />
-            <CalendarBody>
+            <CalendarBody role="row">
               {weekDays.map((item, index) => (
                 <CalendarItem
                   key={index}
@@ -205,7 +205,7 @@ export const Pickr: React.VFC<PickrProps> = ({
                       ? "selectable"
                       : "dormant"
                   }
-                  role="button"
+                  role="cell"
                   title={getTitle(day)}
                   aria-label={getTitle(day)}
                   date={day.dayOfMonth as number}
