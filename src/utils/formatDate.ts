@@ -11,7 +11,7 @@ export const formatDate = (
   };
 
   const paddedDay = pad(day);
-  const paddedMonth = pad(month);
+  const paddedMonth = pad(month + 1);
 
   const allFormats = {
     ddmmyy: `${paddedDay}/${paddedMonth}/${year}`,
