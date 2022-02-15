@@ -104,10 +104,10 @@ export const useCalendar = (visible: boolean) => {
   }, [selectedDay]);
 
   useEffect(() => {
-    const switchDay = (e: KeyboardEvent) => {
-      // exit of calendar is not currently visible
-      if (!visible || !selectedDay || !calendarDays) return;
+    // exit of calendar is not currently visible
+    if (!visible || !selectedDay || !calendarDays) return;
 
+    const switchDay = (e: KeyboardEvent) => {
       // get key name
       const key = e.key.toLowerCase();
       const indexOfCurrent = getIndexOfDay(selectedDay, calendarDays);
