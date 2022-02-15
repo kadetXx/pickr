@@ -3,7 +3,7 @@ export const formatDate = (
   month: number,
   year: number,
   format: "ddmmyy" | "mmddyy" | "yymmdd" | undefined,
-  separator: "/" | "-" | "." | string | undefined
+  separator: "/" | "-" | "." | undefined
 ): DDMMYY => {
   const dateSeparator = separator || "/";
   // extend number object to include padding function

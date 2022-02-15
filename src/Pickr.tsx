@@ -35,7 +35,7 @@ export interface PickrProps extends HTMLAttributes<HTMLDivElement> {
   openByDefault?: boolean;
   closeOnBlur?: boolean;
   format?: "ddmmyy" | "mmddyy" | "yymmdd";
-  separator?: "/" | "-" | "." | string;
+  separator?: "/" | "-" | ".";
   onDateChange: (dateString: Date, date: DDMMYY) => void;
 }
 
