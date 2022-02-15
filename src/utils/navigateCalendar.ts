@@ -21,11 +21,11 @@ const findDay = (
     // get the calendarDays of previou or next group
     const { calendar } = getMonthData(month, year);
 
-    const prevMonthDay = calendar[calendar.length + index - 7];
-    const nextMonthDay = calendar[calendar.length - index + 7];
+    // grab the index of ghost current date we're switching from on prev or next calendar
+    const ghostIndex = calendar.findIndex(item => item.dayOfMonth === currentDay.dayOfMonth && item.month === currentDay.month);
 
-    // grab the day of seeked index
-    const day = belongsToPrev ? prevMonthDay : nextMonthDay;
+    // use the ghost index to select top or bottom item
+    const day = calendar[belongsToPrev ? ghostIndex - 7 : ghostIndex + 7]
 
     // return the day
     return day;
