@@ -17,14 +17,14 @@ export const CalendarHead: React.VFC<CalendarHeadProps> = ({
 }) => {
   return (
     <StyledHead>
-      <Control onClick={() => action("prev")}>
-        <Icon src={ArrowLeft} width={5.27} height={8.68} />
+      <Control onClick={() => action("prev")} aria-label="Move To Last Month">
+        <Icon src={ArrowLeft} width={5.27} height={8.68} alt="ArrowLeft" />
       </Control>
       <Text weight="bold" color="grey" size={13}>
         {month}, {year}
       </Text>
-      <Control onClick={() => action("next")}>
-        <Icon src={ArrowRight} width={5.27} height={8.68} />
+      <Control onClick={() => action("next")} aria-label="Move To Next Month">
+        <Icon src={ArrowRight} width={5.27} height={8.68} alt="ArrowRight" />
       </Control>
     </StyledHead>
   );

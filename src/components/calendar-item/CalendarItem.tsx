@@ -20,7 +20,7 @@ export const CalendarItem: React.VFC<CalendarItemProps> = ({
       status={status}
       isClickable={!!onClick}
       onClick={onClick}
-      aria-selected={status === 'active'}
+      aria-selected={status === "active"}
     >
       <Text
         size={13}
