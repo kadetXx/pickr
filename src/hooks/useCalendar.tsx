@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { getMonthData, getIndexOfDay } from "../utils";
+import { getMonthData, navigateCalendar } from "../utils";
 
 interface CalendarState {
   month: number;
@@ -107,33 +107,9 @@ export const useCalendar = (visible: boolean) => {
     // exit of calendar is not currently visible
     if (!visible || !selectedDay || !calendarDays) return;
 
+    // trigger change
     const switchDay = (e: KeyboardEvent) => {
-      // get key name
-      const key = e.key.toLowerCase();
-      const indexOfCurrent = getIndexOfDay(selectedDay, calendarDays);
-
-      // get next, prev, top and bottom
-      const nextDay = calendarDays[indexOfCurrent + 1];
-      const prevDay = calendarDays[indexOfCurrent - 1];
-      const topDay = calendarDays[indexOfCurrent - 7];
-      const bottomDay = calendarDays[indexOfCurrent + 7];
-
-      switch (key) {
-        case "arrowright":
-          setSelectedDay(nextDay);
-          break;
-        case "arrowleft":
-          setSelectedDay(prevDay);
-          break;
-        case "arrowup":
-          setSelectedDay(topDay);
-          break;
-        case "arrowdown":
-          setSelectedDay(bottomDay);
-          break;
-        default:
-          break;
-      }
+      navigateCalendar(e, calendarDays, selectedDay, setSelectedDay);
     };
 
     // add a key listener

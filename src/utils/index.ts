@@ -4,3 +4,4 @@ export * from './getDayData';
 export * from './getMondays';
 export * from './getIndexOfDay';
 export * from './formatDate';
+export * from './navigateCalendar';
