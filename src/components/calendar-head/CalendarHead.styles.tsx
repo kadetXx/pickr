@@ -5,6 +5,7 @@ export const StyledHead = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 0 0.4rem;
+  cursor: text;
 `;
 
 export const Control = styled.button`
