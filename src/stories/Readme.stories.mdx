@@ -52,17 +52,15 @@ Browse pickr samples now by navigating to them in the sidebar. Also check the `D
 
 <ul>
   <li>
-    <a
-      className="link"
-      href="https://github.com/kadetXx/pickr"
-    >
+    <a className="link" href="https://github.com/kadetXx/pickr">
       Code (Github)
     </a>
   </li>
 </ul>
 
 <div className="tip-wrapper">
-  <span className="tip">Tip</span>Navigate through dates on the calendar with the <code>arrow keys</code>
+  <span className="tip">Tip</span>Navigate through dates on the calendar with
+  the <code>arrow keys</code>
 </div>
 
 ### 🛠 Tools & libraries Used.
@@ -81,7 +79,7 @@ Here is a list of the libraries contained in the package.json and the reasons wh
 
 #### StoryBook
 
-I had to make use of storybook because:
+I made use of storybook because:
 
 - I needed to build Pickr in isolation as an independed component.
 - I was required to provide this **_documentation_** with it.
@@ -94,3 +92,7 @@ I picked Emotion as my choice for **_styling_** for the following reasons:
 - Emotion provides access to component props when writing styles.
 - Emotion lets me use conditionals and javascript functions in my stylesheet. One that I particularly like is a function I used to auto convert px units to rem. This function saved me all the time I would have spent manually dividing px values from figma by 16.
 - And lastly, <a className="link" href="https://float.co">float.co</a> was also styled using emotion so I thought it'll be an impressive choice.
+
+#### Tsconfig Paths (Webpack Plugin)
+
+- I had to make use of this plugin package because storybook doesn't pick up baseUrl and paths configurations from the default tsconfig file. I was fine with that as I could use relative imports but I thought about it once more and decided I preferred absolute imports to keep my import paths short, precise and consistent across separate folders.

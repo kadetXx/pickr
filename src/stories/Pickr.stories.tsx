@@ -1,7 +1,6 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-
-import { Pickr } from "../Pickr";
+import { Pickr } from "@/Pickr";
 
 export default {
   title: "Pickr",

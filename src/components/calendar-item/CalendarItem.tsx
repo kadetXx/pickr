@@ -1,6 +1,6 @@
 import React, { HTMLAttributes } from "react";
 import { StyledDay } from "./CalendarItem.styles";
-import { Text } from "../../shared";
+import { Text } from "@/shared";
 
 export interface CalendarItemProps extends HTMLAttributes<HTMLDivElement> {
   date: string | number;

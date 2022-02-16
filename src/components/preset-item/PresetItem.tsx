@@ -1,5 +1,5 @@
 import React, { ButtonHTMLAttributes } from "react";
-import { Text, Icon } from "../../shared";
+import { Text, Icon } from "@/shared";
 import { StyledPreset } from "./PresetItem.styles";
 
 export interface PresetItemProps

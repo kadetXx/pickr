@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
 
-import { getMonthData, getThisMonday, getLastMonday } from "../utils";
-import { PresetItemProps } from "../components";
+import { getMonthData, getThisMonday, getLastMonday } from "@/utils";
+import { PresetItemProps } from "@/components";
 
-import CalendarStarIcon from "../svg/icon-calendar-star.svg";
-import CalendarStarIconTeal from "../svg/icon-calendar-star-teal.svg";
-import CalendarDayoneIcon from "../svg/icon-calendar-dayone.svg";
-import CalendarDayoneIconTeal from "../svg/icon-calendar-dayone-teal.svg";
-import CalendarMinusIcon from "../svg/icon-calendar-minus.svg";
-import CalendarMinusIconTeal from "../svg/icon-calendar-minus-teal.svg";
-import CalendarEditIcon from "../svg/icon-calendar-edit.svg";
-import CalendarEditIconTeal from "../svg/icon-calendar-edit-teal.svg";
+import CalendarStarIcon from "@/svg/icon-calendar-star.svg";
+import CalendarStarIconTeal from "@/svg/icon-calendar-star-teal.svg";
+import CalendarDayoneIcon from "@/svg/icon-calendar-dayone.svg";
+import CalendarDayoneIconTeal from "@/svg/icon-calendar-dayone-teal.svg";
+import CalendarMinusIcon from "@/svg/icon-calendar-minus.svg";
+import CalendarMinusIconTeal from "@/svg/icon-calendar-minus-teal.svg";
+import CalendarEditIcon from "@/svg/icon-calendar-edit.svg";
+import CalendarEditIconTeal from "@/svg/icon-calendar-edit-teal.svg";
 
 interface Preset {
   icon: string;
