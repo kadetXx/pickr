@@ -3,7 +3,7 @@ import { ptr } from "../../utils";
 import { OverlayProps } from "./Overlay";
 
 export const StyledOverlay = styled.div<Pick<OverlayProps, "visible">>`
-  z-index: 3;
+  z-index: 100;
   display: grid;
   position: absolute;
   left: 0;
