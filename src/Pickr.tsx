@@ -154,7 +154,6 @@ export const Pickr: React.VFC<PickrProps> = ({
         icon={PlusIcon}
         iconRotation={showCalendar ? 45 : 0}
         onClick={() => setShowCalendar(!showCalendar)}
-        onFocus={() => setShowCalendar(true)}
       />
       <Overlay visible={showCalendar}>
         <PickrSections>
