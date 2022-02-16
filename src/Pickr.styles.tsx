@@ -28,6 +28,7 @@ export const PickrSections = styled.div`
   min-height: ${ptr(297)};
   box-sizing: border-box;
   grid-template-columns: ${`${ptr(183)} auto`};
+  z-index: 100;
 
   @media screen and (max-width: 500px) {
     grid-template-columns: 1fr;

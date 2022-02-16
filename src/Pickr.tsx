@@ -30,15 +30,23 @@ import { formatDate } from "./utils";
 import PlusIcon from "./svg/icon-plus.svg";
 
 export interface PickrProps extends HTMLAttributes<HTMLDivElement> {
+  /**  Disables or Enables the datepicker button */
   disabled?: boolean;
-  toggleCalendar?: boolean;
+  /**  Boolean to show or hide the datepicker's calendar. Useful for progamatically updating calendar visibility without having to click on datepicker button */
+  visible?: boolean;
+  /** If set to true, the datepicker will be open by default at initial render */
   openByDefault?: boolean;
+  /** If set to true, datepicker will be closed when focus leaves the datepicker component */
   closeOnBlur?: boolean;
+  /** Sets the date format for datepicker */
   format?: "ddmmyy" | "mmddyy" | "yymmdd";
+  /** Sets the date separator for datepicker */
   separator?: "/" | "-" | ".";
+  /** Callback function to be triggered when a new date is selected. Pickr automatically provides the date in specified format and the datestring this function. */
   onDateChange: (dateString: Date, date: DDMMYY) => void;
 }
 
+/** Custom Datepicker component for react applications.  */
 export const Pickr: React.VFC<PickrProps> = ({
   format,
   separator,
@@ -46,7 +54,7 @@ export const Pickr: React.VFC<PickrProps> = ({
   disabled = false,
   closeOnBlur = false,
   onDateChange,
-  toggleCalendar,
+  visible,
   ...props
 }) => {
   const pickrRef = useRef<HTMLDivElement>(null);
@@ -85,11 +93,11 @@ export const Pickr: React.VFC<PickrProps> = ({
   // set showcalendar based on custom toggle prop
   useEffect(() => {
     // check if customtoggle was provided
-    if (toggleCalendar === undefined) return;
+    if (visible === undefined) return;
 
     // update calendar visibility based on toggle
-    setShowCalendar(toggleCalendar);
-  }, [toggleCalendar]);
+    setShowCalendar(visible);
+  }, [visible]);
 
   // close dropdown on blur
   useEffect(() => {

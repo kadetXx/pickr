@@ -11,7 +11,7 @@ export default {
     format: {
       defaultValue: "ddmmyy",
       control: {
-        type: "inline-radio",
+        type: "radio",
       },
     },
     separator: {
@@ -47,5 +47,5 @@ OpenByDefault.args = {
 
 export const CustomToggle = Template.bind({});
 CustomToggle.args = {
-  toggleCalendar: false,
+  visible: false,
 };
