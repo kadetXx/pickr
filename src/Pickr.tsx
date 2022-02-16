@@ -21,13 +21,13 @@ import {
   PresetItem,
   CalendarHead,
   CalendarItem,
-} from "./components";
+} from "@/components";
 
-import { weekDays, months } from "./constants";
-import { useCalendar, usePresets } from "./hooks";
-import { formatDate } from "./utils";
+import { weekDays, months } from "@/constants";
+import { useCalendar, usePresets } from "@/hooks";
+import { formatDate } from "@/utils";
 
-import PlusIcon from "./svg/icon-plus.svg";
+import PlusIcon from "@/svg/icon-plus.svg";
 
 export interface PickrProps extends HTMLAttributes<HTMLDivElement> {
   /**  Disables or Enables the datepicker button */

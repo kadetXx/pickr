@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { ptr } from "./utils";
+import { ptr } from "@/utils";
 
 export const PickrContainer = styled.div`
   // font

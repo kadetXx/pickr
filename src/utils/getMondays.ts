@@ -1,4 +1,4 @@
-import { getMonthData } from "../utils";
+import { getMonthData } from "@/utils";
 import { getMonthAndYear } from "./getMonthAndYear";
 
 export const getThisMonday = (

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-
-import { getMonthData, navigateCalendar } from "../utils";
+import { getMonthData, navigateCalendar } from "@/utils";
 
 interface CalendarState {
   month: number;

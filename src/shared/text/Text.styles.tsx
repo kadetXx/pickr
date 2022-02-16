@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { ptr } from "../../utils";
+import { ptr } from "@/utils";
 import { TextProps } from "./Text";
 
 export const StyledText = styled.p<Pick<TextProps, "color" | "weight" | "size">>`
