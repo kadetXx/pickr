@@ -1,4 +1,4 @@
-# Pickr - Datepicker Component
+# Pickr - Datepicker
 
 Custom datepicker component with presets for react.
 
