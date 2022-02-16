@@ -46,7 +46,7 @@ export interface PickrProps extends HTMLAttributes<HTMLDivElement> {
   onDateChange: (dateString: Date, date: DDMMYY) => void;
 }
 
-/** Custom Datepicker component for react applications.  */
+/** Custom Datepicker component for react.  */
 export const Pickr: React.VFC<PickrProps> = ({
   format,
   separator,
