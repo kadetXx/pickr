@@ -1,18 +1,18 @@
-# Pickr
+# Pickr - Datepicker Component
 
-Custom datepicker component for react applications.
+Custom datepicker component with presets for react.
 
-## How To Get Started
+## Getting Started
 
 To get the project running on local, do the following:
 
-### Install dependencies
+### - Install dependencies
 
 Run the command `yarn` to install depenedencies. Or `npm install` if you prefer npm.
 
-### Start Storybook
+### - Start Storybook
 
-Run the command `yarn start`. This will open storybook in development mode on port :6006.\
+Run the command `yarn start`. This will open storybook in development mode on port 6006.\
 Open [http://localhost:6006/](http://localhost:6006/) to view it in the browser.
 
 The page will reload if you make edits.\
