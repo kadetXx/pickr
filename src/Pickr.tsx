@@ -42,7 +42,7 @@ export interface PickrProps extends HTMLAttributes<HTMLDivElement> {
   format?: "ddmmyy" | "mmddyy" | "yymmdd";
   /** Sets the date separator for datepicker */
   separator?: "/" | "-" | ".";
-  /** Callback function to be triggered when a new date is selected. Pickr automatically provides the date in specified format and the datestring this function. */
+  /** Callback function to be triggered when a new date is selected. Pickr passes in the date in specified format and the datestring as args to this function. */
   onDateChange: (dateString: Date, date: DDMMYY) => void;
 }
 
