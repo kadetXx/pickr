@@ -1,6 +1,6 @@
 # Pickr - Datepicker
 
-Custom datepicker component with presets for react.
+Custom datepicker component with presets for react applications.
 
 ## Getting Started
 
