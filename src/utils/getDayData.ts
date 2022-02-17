@@ -15,6 +15,7 @@ export const getDayData = ({
   firstDay: number;
   numberOfDays: number;
 }) => {
+  // initialise data object for single day
   let dayData: DayData = {
     weekDay: null,
     dayOfMonth: null,
@@ -74,6 +75,7 @@ export const getDayData = ({
   // set day, date and timestamnp
   dayData["dayOfMonth"] = day;
 
+  // create a new datestring object
   const dateString = new Date(
     `${monthOfCurrentIndex + 1}/${day}/${yearOfCurrentIndex}`
   );
