@@ -2,6 +2,7 @@ import { getFirstdayOfMonth } from "./getIndexOfFirstDayOfMonth";
 import { getDayData } from "./getDayData";
 import { getNumberOfDays } from "./getNumberOfDays";
 
+// generates a grid of days for the calendar
 export const getMonthData = (month: number, year: number) => {
   const totalBlocks: number = 42;
   const calendarDays: DayData[] = [];

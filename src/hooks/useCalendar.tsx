@@ -11,6 +11,7 @@ export const useCalendar = (visible: boolean) => {
   const [calendarDays, setCalendarDays] = useState<DayData[]>();
   const [calendarState, setCalendarState] = useState<CalendarState>();
 
+  // switch the current month back and forth
   const monthSwitcher = (
     month: number,
     year: number,
@@ -102,6 +103,7 @@ export const useCalendar = (visible: boolean) => {
     }
   }, [selectedDay]);
 
+  // allow keyboard arrow keys to switch dates
   useEffect(() => {
     // exit of calendar is not currently visible
     if (!visible || !selectedDay || !calendarDays) return;

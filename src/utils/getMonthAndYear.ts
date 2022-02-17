@@ -1,3 +1,4 @@
+// gets the month and year for the next, previous or current calendar group
 export const getMonthAndYear = ({
   type,
   month,
