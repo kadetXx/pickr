@@ -71,9 +71,9 @@ export const Pickr: React.VFC<PickrProps> = ({
 
     const { dayOfMonth, month, year } = selectedDay;
     const formatted = formatDate(
-      dayOfMonth!!,
-      month!!,
-      year!!,
+      dayOfMonth!,
+      month!,
+      year!,
       format,
       separator
     );
@@ -130,15 +130,15 @@ export const Pickr: React.VFC<PickrProps> = ({
 
     const { dayOfMonth, month, year } = selectedDay;
     const formatted = formatDate(
-      dayOfMonth!!,
-      month!!,
-      year!!,
+      dayOfMonth!,
+      month!,
+      year!,
       format,
       separator
     );
 
     // return datestring and date
-    onDateChange(selectedDay?.dateString!!, formatted);
+    onDateChange(selectedDay?.dateString!, formatted);
 
     // update the active preset
     updateActivePreset(selectedDay);
@@ -184,8 +184,8 @@ export const Pickr: React.VFC<PickrProps> = ({
               action={(direction) => {
                 if (!selectedDay) return;
                 monthSwitcher(
-                  selectedDay.month!!,
-                  selectedDay.year!!,
+                  selectedDay.month!,
+                  selectedDay.year!,
                   direction
                 );
               }}

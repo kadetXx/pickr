@@ -21,16 +21,16 @@ export const useCalendar = (visible: boolean) => {
     let newyear;
 
     if (direction === "next") {
-      newmonth = month === 11 ? 0 : month!! + 1;
-      newyear = month === 11 ? year!! + 1 : year;
+      newmonth = month === 11 ? 0 : month! + 1;
+      newyear = month === 11 ? year! + 1 : year;
     } else {
-      newmonth = month === 0 ? 11 : month!! - 1;
-      newyear = month === 0 ? year!! - 1 : year;
+      newmonth = month === 0 ? 11 : month! - 1;
+      newyear = month === 0 ? year! - 1 : year;
     }
 
     setCalendarState({
       month: newmonth,
-      year: newyear!!,
+      year: newyear!,
     });
   };
 
@@ -95,8 +95,8 @@ export const useCalendar = (visible: boolean) => {
   useEffect(() => {
     if (selectedDay) {
       const { calendar } = getMonthData(
-        selectedDay?.month!!,
-        selectedDay?.year!!
+        selectedDay?.month!,
+        selectedDay?.year!
       );
 
       setCalendarDays(calendar);

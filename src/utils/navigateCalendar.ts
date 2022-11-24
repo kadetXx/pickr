@@ -13,8 +13,8 @@ const findDay = (
   if (belongsToPrev || belongsToNext) {
     // get the month and year of previous or next calendar group
     const [month, year] = getMonthAndYear({
-      month: currentDay.month!!,
-      year: currentDay.year!!,
+      month: currentDay.month!,
+      year: currentDay.year!,
       type: belongsToPrev ? "prev" : "next",
     });
 
