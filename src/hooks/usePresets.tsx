@@ -15,7 +15,7 @@ import CalendarEditIconTeal from "@/svg/icon-calendar-edit-teal.svg";
 interface Preset {
   icon: string;
   iconAlt: string;
-  day: DayData;
+  day: DayData | undefined;
   presetTitle: PresetItemProps["presetTitle"];
 }
 
@@ -27,7 +27,7 @@ export const usePresets = (selectedDay: DayData | undefined) => {
     if (!presets) return;
 
     // grab timestamps of all presets
-    const timestamps = presets?.map((item) => item.day.timeStamp);
+    const timestamps = presets?.map(item => item.day?.timeStamp);
     // check if timestamp of current day is in preset list
     const isPreset = timestamps?.includes(day?.timeStamp);
 
@@ -35,11 +35,11 @@ export const usePresets = (selectedDay: DayData | undefined) => {
     if (isPreset) {
       // grab the items that matched from preset lists
       const matches = presets?.filter(
-        (item) => item.day.timeStamp === day.timeStamp
+        item => item.day?.timeStamp === day?.timeStamp
       );
 
       // get titles of matches
-      const titles = matches?.map((item) => item.presetTitle);
+      const titles = matches?.map(item => item.presetTitle);
 
       // check if any of the current matches have previously been selected
       const isAlreadySelected = titles?.includes(activePreset);
@@ -73,7 +73,7 @@ export const usePresets = (selectedDay: DayData | undefined) => {
     const { calendar } = getMonthData(presentMonth, presentYear);
 
     // find today in calendar days array
-    const indexOfToday = calendar.findIndex((item) => {
+    const indexOfToday = calendar.findIndex(item => {
       return (
         item.dayOfMonth === presentDay &&
         item.month === presentMonth &&
@@ -114,13 +114,13 @@ export const usePresets = (selectedDay: DayData | undefined) => {
         icon: CalendarMinusIcon,
         iconAlt: CalendarMinusIconTeal,
         presetTitle: "This Monday",
-        day: thisMonday!,
+        day: thisMonday,
       },
       {
         icon: CalendarMinusIcon,
         iconAlt: CalendarMinusIconTeal,
         presetTitle: "Last Monday",
-        day: lastMonday!,
+        day: lastMonday,
       },
       {
         icon: CalendarEditIcon,

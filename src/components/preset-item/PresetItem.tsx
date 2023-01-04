@@ -8,7 +8,7 @@ export interface PresetItemProps
   iconAlt: string;
   active: boolean;
   presetTitle: PresetTitle;
-  day: DayData;
+  day: DayData | undefined;
   onClick: () => void;
 }
 

@@ -47,7 +47,7 @@ export const useCalendar = (visible: boolean) => {
     const { calendar } = getMonthData(presentMonth, presentYear);
 
     // grab today's day from generated calendar
-    const today = calendar.find((item) => {
+    const today = calendar.find(item => {
       return (
         item.dayOfMonth === presentDay &&
         item.month === presentMonth &&
@@ -78,7 +78,7 @@ export const useCalendar = (visible: boolean) => {
       const dayToBeSelected =
         dayOfMonth > numberOfDays ? numberOfDays : dayOfMonth;
 
-      const selected = calendar.find((item) => {
+      const selected = calendar.find(item => {
         return (
           item.dayOfMonth === dayToBeSelected &&
           item.month === month &&

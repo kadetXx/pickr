@@ -70,13 +70,7 @@ export const Pickr: React.VFC<PickrProps> = ({
     }
 
     const { dayOfMonth, month, year } = selectedDay;
-    const formatted = formatDate(
-      dayOfMonth!,
-      month!,
-      year!,
-      format,
-      separator
-    );
+    const formatted = formatDate(dayOfMonth!, month!, year!, format, separator);
 
     return activePreset === "Custom" ? formatted : activePreset;
   };
@@ -129,13 +123,7 @@ export const Pickr: React.VFC<PickrProps> = ({
     if (!selectedDay) return;
 
     const { dayOfMonth, month, year } = selectedDay;
-    const formatted = formatDate(
-      dayOfMonth!,
-      month!,
-      year!,
-      format,
-      separator
-    );
+    const formatted = formatDate(dayOfMonth!, month!, year!, format, separator);
 
     // return datestring and date
     onDateChange(selectedDay?.dateString!, formatted);
@@ -158,36 +146,36 @@ export const Pickr: React.VFC<PickrProps> = ({
       <Overlay visible={showCalendar}>
         <PickrSections>
           <PickrPresetList>
-            {presets?.map((option, index) => (
-              <PickrPresetListItem key={index}>
-                <PresetItem
-                  {...option}
-                  title={getTitle(option.day)}
-                  aria-label={option.presetTitle}
-                  active={activePreset === option.presetTitle}
-                  onClick={() => [
-                    setSelectedDay(option.day),
-                    setActivePreset(option.presetTitle),
-                  ]}
-                  onFocus={() => [
-                    setSelectedDay(option.day),
-                    setActivePreset(option.presetTitle),
-                  ]}
-                />
-              </PickrPresetListItem>
-            ))}
+            {presets?.map((option, index) => {
+              if (!option.day) return;
+
+              return (
+                <PickrPresetListItem key={index}>
+                  <PresetItem
+                    {...option}
+                    title={getTitle(option.day)}
+                    aria-label={option.presetTitle}
+                    active={activePreset === option.presetTitle}
+                    onClick={() => [
+                      setSelectedDay(option.day),
+                      setActivePreset(option.presetTitle),
+                    ]}
+                    onFocus={() => [
+                      setSelectedDay(option.day),
+                      setActivePreset(option.presetTitle),
+                    ]}
+                  />
+                </PickrPresetListItem>
+              );
+            })}
           </PickrPresetList>
           <PickrCalendar role="grid">
             <CalendarHead
               month={months[selectedDay?.month || 0]}
               year={selectedDay?.year as number}
-              action={(direction) => {
+              action={direction => {
                 if (!selectedDay) return;
-                monthSwitcher(
-                  selectedDay.month!,
-                  selectedDay.year!,
-                  direction
-                );
+                monthSwitcher(selectedDay.month!, selectedDay.year!, direction);
               }}
             />
             <CalendarBody role="row">
