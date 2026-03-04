@@ -34,20 +34,22 @@ export const StyledDay = styled.span<StyledDayProps>`
   background-color: ${(props) =>
     props.status === "active" ? "var(--col-teal)" : "transparent"};
 
-  &:hover {
-    background-color: ${(props) =>
-      props.status === "active"
-        ? "var(--col-teal)"
-        : props.status === "selectable"
-        ? "var(--col-grey-400)"
-        : "initial"};
+  @media (hover: hover) {
+    &:hover {
+      background-color: ${(props) =>
+        props.status === "active"
+          ? "var(--col-teal)"
+          : props.status === "selectable"
+          ? "var(--col-grey-400)"
+          : "initial"};
+    }
+
+    &:active {
+      transform: ${(props) => (props.isClickable ? "scale(0.92)" : "none")};
+    }
   }
 
   &:focus-visible {
     box-shadow: 0 0 0 2px white, 0 0 0 4px var(--col-teal);
-  }
-
-  &:active {
-    transform: ${(props) => (props.isClickable ? "scale(0.92)" : "none")};
   }
 `;
