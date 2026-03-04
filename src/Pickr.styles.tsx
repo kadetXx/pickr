@@ -29,7 +29,7 @@ export const PickrSections = styled.div`
   box-sizing: border-box;
   grid-template-columns: ${`${ptr(183)} auto`};
 
-  @media screen and (max-width: 500px) {
+  @media screen and (max-width: 600px) {
     grid-template-columns: 1fr;
   }
 `;
@@ -50,11 +50,8 @@ export const PickrPresetList = styled.ul`
   background-color: #2c2c2a;
   padding: ${ptr(24)} ${ptr(17)} ${ptr(24)} ${ptr(25)};
 
-  @media screen and (max-width: 500px) {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.3rem;
-    padding: ${ptr(17)};
+  @media screen and (max-width: 600px) {
+    display: none;
   }
 `;
 

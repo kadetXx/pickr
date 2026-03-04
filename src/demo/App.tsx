@@ -105,6 +105,12 @@ const CardSpacer = styled.div`
   flex: 1;
 `;
 
+const DesktopOnly = styled.div`
+  @media (max-width: 600px) {
+    display: none;
+  }
+`;
+
 export const App: React.VFC = () => {
   const [, setDate] = useState<string>("");
 
@@ -145,11 +151,13 @@ export const App: React.VFC = () => {
           <Pickr closeOnBlur onDateChange={noop} />
         </Card>
 
-        <Card>
-          <CardLabel>Custom Format</CardLabel>
-          <CardSpacer />
-          <Pickr format="yymmdd" separator="." initialDate={new Date(2025, 11, 25)} onDateChange={noop} />
-        </Card>
+        <DesktopOnly>
+          <Card>
+            <CardLabel>Custom Format</CardLabel>
+            <CardSpacer />
+            <Pickr format="yymmdd" separator="." initialDate={new Date(2025, 11, 25)} onDateChange={noop} />
+          </Card>
+        </DesktopOnly>
 
         <Card>
           <CardLabel>Disabled</CardLabel>
