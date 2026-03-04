@@ -15,12 +15,16 @@ export const StyledPreset = styled.button<Pick<PresetItemProps, "active">>`
   height: ${ptr(32)};
   border: unset;
   outline: none;
-  transition: all 0.1s linear;
+  transition: background-color 0.15s ease, box-shadow 0.15s ease;
   background-color: ${(props) =>
     props.active ? "var(--col-grey-600)" : "initial"};
 
   &:hover {
     background-color: ${(props) =>
       !props.active ? "var(--col-grey-400)" : "var(--col-grey-600)"};
+  }
+
+  &:focus-visible {
+    box-shadow: inset 0 0 0 2px var(--col-teal);
   }
 `;

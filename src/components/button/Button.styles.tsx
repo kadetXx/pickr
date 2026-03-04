@@ -5,7 +5,6 @@ import { ButtonProps } from "..";
 export const StyledButton = styled.button<Pick<ButtonProps, 'disabled'>>`
   cursor: pointer;
   position: relative;
-  border: 1px solid black;
   font-family: inherit;
   display: flex;
   justify-content: space-between;
@@ -20,8 +19,20 @@ export const StyledButton = styled.button<Pick<ButtonProps, 'disabled'>>`
   pointer-events: ${(props) => (props.disabled ? "none" : "initial")};
   user-select: ${(props) => (props.disabled ? "none" : "initial")};
   background-color: ${props => props.disabled ? 'var(--col-grey-300)' : 'var(--col-white)'};
+  transition: background-color 0.15s ease, border-color 0.15s ease,
+    box-shadow 0.15s ease;
 
-  &:focus {
+  &:hover {
+    background-color: var(--col-grey-400);
+    border-color: var(--col-grey-200);
+  }
+
+  &:focus-visible {
     outline: none;
+    box-shadow: 0 0 0 2px white, 0 0 0 4px var(--col-teal);
+  }
+
+  &:active {
+    background-color: var(--col-grey-600);
   }
 `;

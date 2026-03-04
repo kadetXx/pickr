@@ -13,7 +13,21 @@ export const Control = styled.button`
   border: none;
   outline: none;
   background-color: transparent;
-  padding: 0 0.5rem;
+  padding: 0.25rem 0.5rem;
   width: fit-content;
   height: fit-content;
+  border-radius: 4px;
+  transition: background-color 0.15s ease, box-shadow 0.15s ease;
+
+  &:hover {
+    background-color: var(--col-grey-400);
+  }
+
+  &:focus-visible {
+    box-shadow: 0 0 0 2px white, 0 0 0 4px var(--col-teal);
+  }
+
+  &:active {
+    background-color: var(--col-grey-300);
+  }
 `;

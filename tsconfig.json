@@ -22,5 +22,5 @@
     }
   },
   "include": ["src", "./declaration.d.ts"],
-  "types": ["@emotion/react/types/css-prop"]
+  "types": ["@emotion/react/types/css-prop", "vite/client"]
 }
