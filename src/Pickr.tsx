@@ -194,24 +194,33 @@ export const Pickr: React.VFC<PickrProps> = ({
                 />
               ))}
 
-              {calendarDays?.map((day, index) => (
-                <CalendarItem
-                  key={index}
-                  status={
-                    day.timeStamp === selectedDay?.timeStamp
-                      ? "active"
-                      : day.month === selectedDay?.month
-                      ? "selectable"
-                      : "dormant"
-                  }
-                  role="gridcell"
-                  aria-selected={day.timeStamp === selectedDay?.timeStamp}
-                  title={getTitle(day)}
-                  aria-label={getTitle(day)}
-                  date={day.dayOfMonth as number}
-                  onClick={() => setSelectedDay(day)}
-                />
-              ))}
+              {calendarDays?.map((day, index) => {
+                const now = new Date();
+                const isToday =
+                  day.dayOfMonth === now.getDate() &&
+                  day.month === now.getMonth() &&
+                  day.year === now.getFullYear();
+
+                return (
+                  <CalendarItem
+                    key={index}
+                    status={
+                      day.timeStamp === selectedDay?.timeStamp
+                        ? "active"
+                        : day.month === (calendarState?.month ?? selectedDay?.month)
+                        ? "selectable"
+                        : "dormant"
+                    }
+                    isToday={isToday}
+                    role="gridcell"
+                    aria-selected={day.timeStamp === selectedDay?.timeStamp}
+                    title={getTitle(day)}
+                    aria-label={getTitle(day)}
+                    date={day.dayOfMonth as number}
+                    onClick={() => setSelectedDay(day)}
+                  />
+                );
+              })}
             </CalendarBody>
           </PickrCalendar>
         </PickrSections>

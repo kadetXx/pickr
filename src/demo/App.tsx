@@ -18,11 +18,10 @@ const Page = styled.div`
 
 const Header = styled.div`
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
   padding: 1.5rem 0;
 
   @media (max-width: 600px) {
-    justify-content: flex-start;
     padding: 1rem 0;
   }
 `;

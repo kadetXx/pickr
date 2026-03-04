@@ -5,12 +5,14 @@ import { Text } from "@/shared";
 export interface CalendarItemProps extends HTMLAttributes<HTMLDivElement> {
   date: string | number;
   status: "active" | "selectable" | "dormant";
+  isToday?: boolean;
   onClick?: () => void;
 }
 
 export const CalendarItem: React.VFC<CalendarItemProps> = ({
   status,
   date,
+  isToday,
   onClick,
   ...props
 }) => {
@@ -19,6 +21,7 @@ export const CalendarItem: React.VFC<CalendarItemProps> = ({
       {...props}
       status={status}
       isClickable={!!onClick}
+      isToday={!!isToday}
       onClick={onClick}
     >
       <Text

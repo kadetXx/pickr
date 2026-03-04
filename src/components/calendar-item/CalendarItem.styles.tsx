@@ -4,14 +4,30 @@ import { CalendarItemProps } from "./CalendarItem";
 
 interface StyledDayProps extends Pick<CalendarItemProps, "status"> {
   isClickable: boolean;
+  isToday: boolean;
 }
 
 export const StyledDay = styled.span<StyledDayProps>`
   width: ${ptr(36)};
   height: ${ptr(36)};
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   border-radius: 6px;
+  position: relative;
+
+  &::after {
+    content: '';
+    display: ${(props) => (props.isToday ? "block" : "none")};
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: ${(props) =>
+      props.status === "active" ? "var(--col-white)" : "var(--col-teal)"};
+    position: absolute;
+    bottom: 3.75px;
+  }
   outline: none;
   cursor: ${(props) => (props.isClickable ? "pointer" : "initial")};
   transition: background-color 0.15s ease, box-shadow 0.15s ease,
