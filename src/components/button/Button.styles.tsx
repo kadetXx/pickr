@@ -21,6 +21,8 @@ export const StyledButton = styled.button<Pick<ButtonProps, 'disabled'>>`
   background-color: ${props => props.disabled ? 'var(--col-grey-300)' : 'var(--col-white)'};
   transition: background-color 0.15s ease, border-color 0.15s ease,
     box-shadow 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
 
   @media (hover: hover) {
     &:hover {
