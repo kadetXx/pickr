@@ -62,7 +62,7 @@ export const Pickr: React.VFC<PickrProps> = ({
 }) => {
   const pickrRef = useRef<HTMLDivElement>(null);
   const [showCalendar, setShowCalendar] = useState<boolean>(false);
-  const { selectedDay, setSelectedDay, calendarDays, monthSwitcher } =
+  const { selectedDay, setSelectedDay, calendarDays, calendarState, monthSwitcher } =
     useCalendar(showCalendar, initialDate);
   const { presets, activePreset, setActivePreset, updateActivePreset } =
     usePresets(selectedDay);
@@ -176,11 +176,13 @@ export const Pickr: React.VFC<PickrProps> = ({
           </PickrPresetList>
           <PickrCalendar role="grid">
             <CalendarHead
-              month={months[selectedDay?.month || 0]}
-              year={selectedDay?.year as number}
+              month={months[calendarState?.month ?? selectedDay?.month ?? 0]}
+              year={calendarState?.year ?? selectedDay?.year as number}
               action={direction => {
-                if (!selectedDay) return;
-                monthSwitcher(selectedDay.month!, selectedDay.year!, direction);
+                const m = calendarState?.month ?? selectedDay?.month;
+                const y = calendarState?.year ?? selectedDay?.year;
+                if (m == null || y == null) return;
+                monthSwitcher(m, y, direction);
               }}
             />
             <CalendarBody role="row">

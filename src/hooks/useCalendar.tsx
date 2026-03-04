@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { getMonthData, navigateCalendar } from "@/utils";
 
 interface CalendarState {
@@ -10,6 +10,7 @@ export const useCalendar = (visible: boolean, initialDate?: Date) => {
   const [selectedDay, setSelectedDay] = useState<DayData>();
   const [calendarDays, setCalendarDays] = useState<DayData[]>();
   const [calendarState, setCalendarState] = useState<CalendarState>();
+  const isNavigating = useRef(false);
 
   // switch the current month back and forth
   const monthSwitcher = (
@@ -28,6 +29,7 @@ export const useCalendar = (visible: boolean, initialDate?: Date) => {
       newyear = month === 0 ? year! - 1 : year;
     }
 
+    isNavigating.current = true;
     setCalendarState({
       month: newmonth,
       year: newyear!,
@@ -68,26 +70,33 @@ export const useCalendar = (visible: boolean, initialDate?: Date) => {
     });
   }, []);
 
-  // update calendar and selected date each time month or year is manually switched
+  // update calendar each time month or year is switched
   useEffect(() => {
-    if (calendarState && selectedDay?.dayOfMonth) {
+    if (calendarState) {
       const { month, year } = calendarState;
-      const { dayOfMonth } = selectedDay;
-      const { calendar, numberOfDays } = getMonthData(month, year);
-
-      const dayToBeSelected =
-        dayOfMonth > numberOfDays ? numberOfDays : dayOfMonth;
-
-      const selected = calendar.find(item => {
-        return (
-          item.dayOfMonth === dayToBeSelected &&
-          item.month === month &&
-          item.year === year
-        );
-      });
-
+      const { calendar } = getMonthData(month, year);
       setCalendarDays(calendar);
-      setSelectedDay(selected);
+
+      // only move selection when navigating via day click, not arrow buttons
+      if (!isNavigating.current && selectedDay?.dayOfMonth) {
+        const { dayOfMonth } = selectedDay;
+        const { numberOfDays } = getMonthData(month, year);
+
+        const dayToBeSelected =
+          dayOfMonth > numberOfDays ? numberOfDays : dayOfMonth;
+
+        const selected = calendar.find(item => {
+          return (
+            item.dayOfMonth === dayToBeSelected &&
+            item.month === month &&
+            item.year === year
+          );
+        });
+
+        setSelectedDay(selected);
+      }
+
+      isNavigating.current = false;
     }
   }, [calendarState]);
 
@@ -126,6 +135,7 @@ export const useCalendar = (visible: boolean, initialDate?: Date) => {
     selectedDay,
     setSelectedDay,
     calendarDays,
+    calendarState,
     monthSwitcher,
   };
 };
