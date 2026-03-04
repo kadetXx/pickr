@@ -30,8 +30,7 @@ export const StyledDay = styled.span<StyledDayProps>`
   }
   outline: none;
   cursor: ${(props) => (props.isClickable ? "pointer" : "initial")};
-  transition: background-color 0.15s ease, box-shadow 0.15s ease,
-    transform 0.1s ease;
+  transition: box-shadow 0.15s ease;
   background-color: ${(props) =>
     props.status === "active" ? "var(--col-teal)" : "transparent"};
 
