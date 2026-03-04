@@ -15,7 +15,7 @@ export const PickrContainer = styled.div`
   --col-grey-200: #c8c7c1;
   --col-grey-100: #90908c;
   --col-grey: #706f6c;
-  --col-teal: #0e9888;
+  --col-teal: #2c2c2a;
 
   cursor: pointer;
   width: fit-content;
@@ -47,7 +47,7 @@ export const PickrPresetList = styled.ul`
   margin: 0;
   border: 0;
   list-style: none;
-  background-color: var(--col-grey-500);
+  background-color: #2c2c2a;
   padding: ${ptr(24)} ${ptr(17)} ${ptr(24)} ${ptr(25)};
 
   @media screen and (max-width: 500px) {

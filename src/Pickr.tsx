@@ -42,6 +42,8 @@ export interface PickrProps extends HTMLAttributes<HTMLDivElement> {
   format?: "ddmmyy" | "mmddyy" | "yymmdd";
   /** Sets the date separator for datepicker */
   separator?: "/" | "-" | ".";
+  /** Sets the initial selected date */
+  initialDate?: Date;
   /** Callback function to be triggered when a new date is selected. Pickr passes in the date in specified format and the datestring as args to this function. */
   onDateChange: (dateString: Date, date: DDMMYY) => void;
 }
@@ -53,6 +55,7 @@ export const Pickr: React.VFC<PickrProps> = ({
   openByDefault = false,
   disabled = false,
   closeOnBlur = false,
+  initialDate,
   onDateChange,
   visible,
   ...props
@@ -60,7 +63,7 @@ export const Pickr: React.VFC<PickrProps> = ({
   const pickrRef = useRef<HTMLDivElement>(null);
   const [showCalendar, setShowCalendar] = useState<boolean>(false);
   const { selectedDay, setSelectedDay, calendarDays, monthSwitcher } =
-    useCalendar(showCalendar);
+    useCalendar(showCalendar, initialDate);
   const { presets, activePreset, setActivePreset, updateActivePreset } =
     usePresets(selectedDay);
 
@@ -99,16 +102,18 @@ export const Pickr: React.VFC<PickrProps> = ({
     if (!closeOnBlur || !showCalendar) return;
 
     const handleClick = (e: MouseEvent) => {
-      // get classname of main pickr parent container
-      const parentClassname = pickrRef.current?.className;
-      // get clicked element
       const target = e.target as HTMLElement;
 
-      // check if clicked item is a decendant of main pickr parent container
-      const isDescendant = target?.closest(`.${parentClassname}`);
+      // check if click is inside the pickr container
+      const inPickr = pickrRef.current?.contains(target);
 
-      // close picker if clicked element isn't a decendant of main pickr parent
-      !isDescendant && setShowCalendar(false);
+      // check if click is inside a portaled overlay
+      const inOverlay = target.closest('[data-pickr-overlay]');
+
+      // close picker if click is outside both
+      if (!inPickr && !inOverlay) {
+        setShowCalendar(false);
+      }
     };
 
     // rlisten for click events in window
@@ -143,7 +148,7 @@ export const Pickr: React.VFC<PickrProps> = ({
         iconRotation={showCalendar ? 45 : 0}
         onClick={() => setShowCalendar(!showCalendar)}
       />
-      <Overlay visible={showCalendar}>
+      <Overlay visible={showCalendar} onClose={() => setShowCalendar(false)}>
         <PickrSections>
           <PickrPresetList>
             {presets?.map((option, index) => {

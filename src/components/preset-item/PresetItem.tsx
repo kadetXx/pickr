@@ -35,7 +35,7 @@ export const PresetItem: React.VFC<PresetItemProps> = ({
       />
       <Text
         size={13}
-        color={active ? "teal" : "grey-100"}
+        color={active ? "white" : "grey-200"}
         weight={active ? "bold" : "normal"}
       >
         {presetTitle}

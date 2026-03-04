@@ -6,7 +6,7 @@ interface CalendarState {
   year: number;
 }
 
-export const useCalendar = (visible: boolean) => {
+export const useCalendar = (visible: boolean, initialDate?: Date) => {
   const [selectedDay, setSelectedDay] = useState<DayData>();
   const [calendarDays, setCalendarDays] = useState<DayData[]>();
   const [calendarState, setCalendarState] = useState<CalendarState>();
@@ -37,7 +37,7 @@ export const useCalendar = (visible: boolean) => {
   // populate calendar and set default selected date to today on mount
   useEffect(() => {
     // create new date
-    const date = new Date();
+    const date = initialDate || new Date();
     // get preset day
     const presentDay = date.getDate();
     const presentMonth = date.getMonth();
